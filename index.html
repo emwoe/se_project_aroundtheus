@@ -13,49 +13,41 @@
     <link rel="stylesheet" href="pages/index.css" />
     <link rel="stylesheet" href="vendor/fonts.css" />
   </head>
-  <body>
-    <div class="page">
-      <header class="header">
-        <img
-          class="header__logo"
-          src="images/TitleImg.svg"
-          alt="Around the U.S."
-        />
-        <div class="header__underline"></div>
-      </header>
-      <main class="content">
-        <div class="profile">
-          <div class="profile__circle">
-            <img
-              class="profile__avatar"
-              src="images/jacques-cousteau.svg"
-              alt="Image of Jacques Cousteau"
-            />
-          </div>
-          <div class="profile__info">
-            <h1 class="info__name">Jacques Cousteau</h1>
-            <button class="info__button" type="button">
-              <img class="info__pen" src="images/EditVector.svg" />
-            </button>
-            <p class="info__job-title">Explorer</p>
-          </div>
-          <button class="profile__button" type="button">
-            <img src="images/PlusVector.svg" />
+  <body class="page">
+    <header class="header">
+      <img
+        class="header__logo"
+        src="images/TitleImg.svg"
+        alt="Around the U.S."
+      />
+      <div class="header__underline"></div>
+    </header>
+    <main class="content">
+      <div class="profile">
+        <div class="profile__circle"></div>
+        <div class="profile__info">
+          <h1 class="info__name">Jacques Cousteau</h1>
+          <button class="info__button" type="button">
+            <img class="info__pen" src="images/EditVector.svg" />
           </button>
+          <p class="info__job-title">Explorer</p>
         </div>
-        <div class="elements">
-          <div class="card">
-            <img class="card__image" />
-            <div class="card__label">
-              <p class="card__name"></p>
-              <img class="card__heart" />
-            </div>
+        <button class="profile__button" type="button">
+          <img class="profile__plus" src="images/PlusVector.svg" />
+        </button>
+      </div>
+      <div class="elements">
+        <div class="card">
+          <img class="card__image" />
+          <div class="card__label">
+            <p class="card__name"></p>
+            <img class="card__heart" />
           </div>
         </div>
-      </main>
-      <footer class="footer">
-        <p class="footer__copyright"></p>
-      </footer>
-    </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright"></p>
+    </footer>
   </body>
 </html>

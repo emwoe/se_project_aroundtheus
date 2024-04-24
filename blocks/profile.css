@@ -1,27 +1,24 @@
 .profile {
   padding: 40px 200px 0px;
   background-color: #000;
-  width: 880px;
+  /*
+  width: 100%;
   height: 120px;
+  */
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .profile__circle {
+  background-image: url("../images/jacques-cousteau.svg");
   height: 120px;
   width: 120px;
   border-radius: 50%;
-  overflow: hidden;
-}
-
-.profile_avatar {
-  height: 127.5px;
-  width: 168.75px;
+  flex-shrink: 0;
 }
 
 .profile__info {
   height: 77px;
-  width: 415px;
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
@@ -29,4 +26,17 @@
 }
 
 .profile__button {
+  width: 150px;
+  height: 50px;
+  flex-shrink: 0;
+  border: solid #fff 2px;
+  border-radius: 2%;
+  background-color: #000;
+  margin: 13px 0 14px 165px;
+}
+
+.profile__plus {
+  margin: auto;
+  height: 22px;
+  width: 22px;
 }
