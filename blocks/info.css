@@ -37,3 +37,9 @@
   overflow: hidden;
   max-width: 150px;
 }
+
+@media all and (max-width: 320px) {
+    .info__name {
+        font-size: 22px;
+
+}

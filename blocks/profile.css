@@ -3,12 +3,14 @@
   background-color: #000;
   display: flex;
   flex-wrap: wrap;
-  max-width: 1280px;
-  box-sizing: border-box;
+  max-width: 80vw;
+  min-width: 70vw;
+  justify-content: flex-start;
 }
 
 .profile__circle {
   background-image: url("../images/jacques-cousteau.svg");
+  margin: auto;
   height: 120px;
   width: 120px;
   border-radius: 50%;
@@ -18,10 +20,7 @@
 .profile__info {
   height: 77px;
   display: grid;
-  grid-template-areas:
-    "name button"
-    "description description";
-  grid-template-columns: minmax(auto, 373px);
+  grid-template-columns: minmax(auto, 373px) auto;
   margin: 22px 0px 21px 30px;
 }
 
@@ -32,11 +31,29 @@
   border: solid #fff 2px;
   border-radius: 2%;
   background-color: #000;
-  margin: auto 0 auto 165px;
+  margin: auto 0 auto 15vw;
 }
 
 .profile__plus {
   margin: auto;
   height: 22px;
   width: 22px;
+}
+
+@media all and (max-width: 320px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 282px;
+  }
+
+  .profile__info {
+    margin: auto 0;
+  }
+
+  .profile__button {
+    width: 256px;
+    margin: 0;
+  }
 }

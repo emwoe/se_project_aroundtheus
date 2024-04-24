@@ -1,6 +1,6 @@
 .footer {
   background-color: #000;
-  display: flex;
+  max-width: 880px;
 }
 
 .footer__copyright {
@@ -8,4 +8,5 @@
   color: #545454;
   font-size: 18px;
   margin-bottom: 60px;
+  max-width: fit-content;
 }
