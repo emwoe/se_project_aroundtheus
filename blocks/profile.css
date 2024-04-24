@@ -1,12 +1,10 @@
 .profile {
-  padding: 40px 200px 0px;
+  padding-top: 40px;
   background-color: #000;
-  /*
-  width: 100%;
-  height: 120px;
-  */
   display: flex;
   flex-wrap: wrap;
+  max-width: 1280px;
+  box-sizing: border-box;
 }
 
 .profile__circle {
@@ -20,8 +18,10 @@
 .profile__info {
   height: 77px;
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+    "name button"
+    "description description";
+  grid-template-columns: minmax(auto, 373px);
   margin: 22px 0px 21px 30px;
 }
 
@@ -32,7 +32,7 @@
   border: solid #fff 2px;
   border-radius: 2%;
   background-color: #000;
-  margin: 13px 0 14px 165px;
+  margin: auto 0 auto 165px;
 }
 
 .profile__plus {

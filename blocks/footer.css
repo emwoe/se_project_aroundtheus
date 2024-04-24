@@ -1,0 +1,11 @@
+.footer {
+  background-color: #000;
+  display: flex;
+}
+
+.footer__copyright {
+  font-family: "InterVariable", sans-serif;
+  color: #545454;
+  font-size: 18px;
+  margin-bottom: 60px;
+}

@@ -5,6 +5,9 @@
   line-height: 1.14;
   font-weight: 500;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .info__button {
@@ -13,7 +16,7 @@
   border: solid 1px;
   border-color: #fff;
   background-color: #000;
-  margin: 15px 0 9px 18px;
+  margin-top: 15px;
 }
 
 .info__pen {
@@ -29,4 +32,8 @@
   line-height: 1.22;
   font-weight: thin;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 150px;
 }

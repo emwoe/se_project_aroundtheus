@@ -1,0 +1,37 @@
+.card {
+  height: 361px;
+  width: 282px;
+  background-color: #fff;
+  border-radius: 10%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__image {
+  height: 282px;
+  width: 282px;
+}
+
+.card__label {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card__name {
+  font-size: 24px;
+  font-family: "InterVariable", sans-serif;
+  font-weight: bold;
+  margin-left: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 219px;
+}
+
+.card__heart {
+  height: 18px;
+  margin-right: 20px;
+  margin-top: 31px;
+}
