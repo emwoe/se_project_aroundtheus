@@ -5,22 +5,18 @@
   column-gap: 17px;
   row-gap: 20px;
   padding: 5vh 0 4vh 0;
-  /*
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  justify-content: center;
-  */
+  width: 880px;
+  margin: 0 auto;
 }
 
-/*
-.elements__wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 282px);
-  background-color: #000;
-  column-gap: 17px;
-  row-gap: 20px;
-  max-width: 880px;
-  padding: 5vh 0 4vh 0;
+@media all and (max-width: 1092px) {
+  .elements {
+    max-width: 581px;
+  }
 }
-*/
+
+@media all and (max-width: 700px) {
+  .elements {
+    max-width: fit-content;
+  }
+}

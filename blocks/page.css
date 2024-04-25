@@ -6,8 +6,18 @@
   box-sizing: border-box;
   padding-left: 10vw;
   padding-right: 10vw;
-  flex-direction: column;
-  justify-content: center;
   min-width: 320px;
   max-width: 1280px;
 }
+
+@media screen and (max-width: 1210px) {
+  .page {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+/* I am having trouble getting .page or .content to 
+function correctly when I attempt to make them flexboxes 
+and use justify-content to center. I have applied margin: auto to .profile and .elements and .header
+because I haven't been able to get the content to center otherwise. */

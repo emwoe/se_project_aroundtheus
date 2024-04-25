@@ -1,3 +1,10 @@
+.info {
+    height: 77px;
+    display: grid;
+    grid-template-columns: minmax(auto, 373px) auto;
+    margin: 22px 0px 21px 30px;
+  }
+
 .info__name {
   font-family: "Intervariable", sans-serif;
   color: #fff;
@@ -36,10 +43,47 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: 150px;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 1042px) {
+    .info {
+        margin-left: 15px;
+    }
+    
     .info__name {
+        font-size: 32px;
+        line-height: 1.14;
+    }
+
+    .info__job-title {
+        font-size: 18px;
+        line-height: 1.22;
+    }
+    
+  
+}
+
+
+@media all and (max-width: 700px) {
+.info {
+    margin: 0;
+}
+
+.info__name {
         font-size: 22px;
 
 }
+
+.info__button {
+    margin: 0;
+}
+
+.info__job-title {
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+
+

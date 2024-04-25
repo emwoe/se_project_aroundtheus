@@ -7,23 +7,18 @@
   padding-top: 45px;
   max-width: 880px;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .header__logo {
   height: 33px;
   width: 173px;
-  /*
-  margin-left: 200px;
-  */
   margin-bottom: 41px;
 }
 
 .header__underline {
   border-bottom: solid 1px;
   border-color: #545454;
-  /*
-  margin-left: 200px;
-  */
   min-width: 320px;
   max-width: 880px;
 }
