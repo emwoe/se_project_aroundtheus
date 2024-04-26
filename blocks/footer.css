@@ -11,8 +11,13 @@
   max-width: fit-content;
 }
 
-@media all and (max-width: 700px) {
-  .footer {
-    max-width: 282px;
-  }
-}
+@media all and (max-width: 1042px) {
+    .header {
+     width: 95%;
+    }
+   }
+   
+   @media all and (max-width: 700px) {
+     .header {
+       width: 100%;
+     }
