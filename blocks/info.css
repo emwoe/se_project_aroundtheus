@@ -1,7 +1,11 @@
 .info {
   height: 77px;
   display: grid;
+  /*
   grid-template-columns: minmax(auto, 373px) auto;
+  */
+  grid-template-columns: auto auto;
+  align-items: baseline;
   margin: 22px 0px 21px 30px;
 }
 
@@ -20,6 +24,7 @@
 .info__button {
   height: 24px;
   width: 24px;
+  margin-left: 18px;
   border: solid 1px;
   border-color: #fff;
   background-color: #000;
