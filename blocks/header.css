@@ -5,7 +5,7 @@
   align-content: space-between;
   justify-content: center;
   padding-top: 45px;
-  max-width: 880px;
+  width: 82%;
   box-sizing: border-box;
   margin: 0 auto;
 }
@@ -19,6 +19,4 @@
 .header__underline {
   border-bottom: solid 1px;
   border-color: #545454;
-  min-width: 320px;
-  max-width: 880px;
 }

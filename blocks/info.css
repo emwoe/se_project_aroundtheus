@@ -1,9 +1,9 @@
 .info {
-    height: 77px;
-    display: grid;
-    grid-template-columns: minmax(auto, 373px) auto;
-    margin: 22px 0px 21px 30px;
-  }
+  height: 77px;
+  display: grid;
+  grid-template-columns: minmax(auto, 373px) auto;
+  margin: 22px 0px 21px 30px;
+}
 
 .info__name {
   font-family: "Intervariable", sans-serif;
@@ -24,12 +24,14 @@
   border-color: #fff;
   background-color: #000;
   margin-top: 15px;
+  background-image: url(../images/EditVector.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.info__pen {
-  height: 10px;
-  width: 10px;
-  margin: auto;
+.info__button:hover {
+  border-color: #606060;
+  background-image: url(../images/graypen3.svg);
 }
 
 .info__job-title {
@@ -48,42 +50,47 @@
 }
 
 @media all and (max-width: 1042px) {
-    .info {
-        margin-left: 15px;
-    }
-    
-    .info__name {
-        font-size: 32px;
-        line-height: 1.14;
-    }
+  .info {
+    margin-left: 15px;
+  }
 
-    .info__job-title {
-        font-size: 18px;
-        line-height: 1.22;
-    }
-    
-  
+  .info__name {
+    font-size: 32px;
+    line-height: 1.14;
+  }
+
+  .info__job-title {
+    font-size: 18px;
+    line-height: 1.22;
+  }
 }
-
 
 @media all and (max-width: 700px) {
-.info {
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    margin: 30 0 0 0;
+  }
+
+  .info__name {
+    font-size: 22px;
+    padding-bottom: 10px;
+  }
+
+  .info__button {
     margin: 0;
-}
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    height: 18px;
+    width: 18px;
+  }
 
-.info__name {
-        font-size: 22px;
-
-}
-
-.info__button {
-    margin: 0;
-}
-
-.info__job-title {
+  .info__job-title {
     margin: 0 auto;
     font-size: 14px;
+  }
 }
-
-
-

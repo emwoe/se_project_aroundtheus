@@ -5,7 +5,9 @@
   flex-wrap: nowrap;
   width: fit-content;
   max-width: 880px;
+  /*
   margin: auto;
+  */
 }
 
 .profile__circle {
@@ -25,13 +27,23 @@
   border-radius: 2%;
   background-color: #000;
   margin: auto 0 auto 15vw;
+  background-image: url(../images/PlusVector.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
+.profile__button:hover {
+  border: #606060 solid 2px;
+  background-image: url(../images/grayplus2.svg);
+}
+
+/*
 .profile__plus {
   margin: auto;
   height: 22px;
   width: 22px;
 }
+*/
 
 @media all and (max-width: 1042px) {
   .profile__button {
