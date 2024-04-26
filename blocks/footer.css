@@ -1,6 +1,6 @@
 .footer {
   background-color: #000;
-  width: 85%;
+  width: 88%;
 }
 
 .footer__copyright {
@@ -12,13 +12,13 @@
 }
 
 @media all and (max-width: 1042px) {
-  .header {
+  .footer {
     width: 95%;
   }
 }
 
 @media all and (max-width: 700px) {
-  .header {
+  .footer {
     width: 100%;
   }
 }
