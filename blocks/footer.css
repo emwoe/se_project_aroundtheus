@@ -12,12 +12,13 @@
 }
 
 @media all and (max-width: 1042px) {
-    .header {
-     width: 95%;
-    }
-   }
-   
-   @media all and (max-width: 700px) {
-     .header {
-       width: 100%;
-     }
+  .header {
+    width: 95%;
+  }
+}
+
+@media all and (max-width: 700px) {
+  .header {
+    width: 100%;
+  }
+}

@@ -1,10 +1,6 @@
 .info {
-  height: 77px;
   display: grid;
-  /*
-  grid-template-columns: minmax(auto, 373px) auto;
-  */
-  grid-template-columns: auto auto;
+  grid-template-columns: minmax(auto fit-content) auto;
   align-items: baseline;
   margin: 22px 0px 21px 30px;
 }
@@ -44,7 +40,6 @@
   color: #fff;
   font-size: 18px;
   line-height: 1.22;
-  font-weight: thin;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -76,8 +71,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    height: 50px;
-    margin: 30 0 0 0;
+    margin: 30px 0 36px 0;
   }
 
   .info__name {
