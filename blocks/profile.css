@@ -22,7 +22,7 @@
   border: solid #fff 2px;
   border-radius: 2%;
   background-color: #000;
-  margin: auto 0 auto 15vw;
+  margin: auto 0 auto 13vw;
   background-image: url(../images/PlusVector.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -32,14 +32,6 @@
   border: #606060 solid 2px;
   background-image: url(../images/grayplus2.svg);
 }
-
-/*
-.profile__plus {
-  margin: auto;
-  height: 22px;
-  width: 22px;
-}
-*/
 
 @media all and (max-width: 1042px) {
   .profile__button {
