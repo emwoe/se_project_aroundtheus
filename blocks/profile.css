@@ -7,7 +7,7 @@
 }
 
 .profile__circle {
-  background-image: url("../images/jacques-cousteau.svg");
+  background-image: url(../images/Avatar.png);
   margin: 0;
   height: 120px;
   width: 120px;
@@ -20,17 +20,17 @@
   height: 50px;
   flex-shrink: 0;
   border: solid #fff 2px;
-  border-radius: 2%;
+  border-radius: 2px;
   background-color: #000;
   margin: auto 0 auto 13vw;
   background-image: url(../images/PlusVector.svg);
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .profile__button:hover {
-  border: #606060 solid 2px;
-  background-image: url(../images/grayplus2.svg);
+  opacity: 50%;
 }
 
 @media all and (max-width: 1042px) {
@@ -41,18 +41,12 @@
 
 @media all and (max-width: 700px) {
   .profile {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     width: 282px;
   }
 
   .profile__circle {
-    margin: 0 auto;
-  }
-
-  .profile__info {
-    max-width: fit-content;
     margin: 0 auto;
   }
 

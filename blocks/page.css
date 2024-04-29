@@ -9,7 +9,9 @@
   box-sizing: border-box;
   padding-left: 10vw;
   padding-right: 10vw;
+  /*
   min-width: 320px;
+  */
   max-width: 1280px;
 }
 

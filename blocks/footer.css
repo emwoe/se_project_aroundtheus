@@ -7,6 +7,8 @@
   font-family: "Inter Regular", sans-serif;
   color: #545454;
   font-size: 18px;
+  line-height: auto;
+  margin-top: 0px;
   margin-bottom: 60px;
   max-width: fit-content;
 }
@@ -15,10 +17,18 @@
   .footer {
     width: 95%;
   }
+
+  .footer__copyright {
+    font-size: 16px;
+  }
 }
 
 @media all and (max-width: 700px) {
   .footer {
     width: 100%;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
   }
 }

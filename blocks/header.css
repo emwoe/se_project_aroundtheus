@@ -8,6 +8,8 @@
   width: 85%;
   box-sizing: border-box;
   margin: 0 auto;
+  border-bottom: solid 1px;
+  border-color: #d9d9d9;
 }
 
 .header__logo {
@@ -16,18 +18,14 @@
   margin-bottom: 41px;
 }
 
-.header__underline {
-  border-bottom: solid 1px;
-  border-color: #545454;
-}
-
 @media all and (max-width: 1042px) {
- .header {
-  width: 95%;
- }
+  .header {
+    width: 95%;
+  }
 }
 
 @media all and (max-width: 700px) {
   .header {
-    width: 100vw;
+    width: 100%;
   }
+}
