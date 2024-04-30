@@ -1,6 +1,6 @@
 .info {
   display: grid;
-  grid-template-columns: minmax(80%, 100%) auto;
+  grid-template-columns: minmax(90%, 373px) auto;
   align-items: baseline;
   margin: 22px 0px 21px 30px;
 }
