@@ -3,8 +3,13 @@
   background-color: #000;
   display: flex;
   flex-wrap: nowrap;
-  max-width: 880px;
+  width: 100%;
 }
+/*
+.profile__wrapper {
+  display: flex;
+}
+*/
 
 .profile__circle {
   background-image: url(../images/Avatar.png);
@@ -22,7 +27,7 @@
   border: solid #fff 2px;
   border-radius: 2px;
   background-color: #000;
-  margin: auto 0 auto 13vw;
+  margin: auto 0 auto auto;
   background-image: url(../images/PlusVector.svg);
   background-position: center;
   background-repeat: no-repeat;
