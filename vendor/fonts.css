@@ -1,3 +1,13 @@
+/*
+NOTE TO REVIEWER: I got a comment about using 'Inter' for
+all of the fonts, since they are the same family.
+This didn't work and I reverted to using 3 different calls
+with distinct font family names.
+
+Also: When I use Medium for the name, it doesn't look like the brief.
+I went back to InterRegular.
+*/
+
 @font-face {
   font-family: "InterRegular";
   font-style: normal;
@@ -8,7 +18,7 @@
 @font-face {
   font-family: "InterMedium";
   font-style: normal;
-  font-weight: medium;
+  font-weight: normal;
   src: url("fonts/Inter-Medium.woff2") format("woff2");
 }
 

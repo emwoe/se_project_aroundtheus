@@ -5,11 +5,6 @@
   flex-wrap: nowrap;
   width: 100%;
 }
-/*
-.profile__wrapper {
-  display: flex;
-}
-*/
 
 .profile__circle {
   background-image: url(../images/Avatar.png);
