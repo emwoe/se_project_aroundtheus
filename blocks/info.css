@@ -1,13 +1,13 @@
 .info {
   display: grid;
-  grid-template-columns: minmax(90%, 400px) auto;
+  grid-template-columns: minmax(auto, 390px) auto;
   align-items: baseline;
   margin: 22px 0px 21px 30px;
 }
 
 .info__name {
-  font-family: "InterMedium", sans-serif;
-  font-weight: normal;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
   color: #fff;
   font-size: 42px;
   line-height: 1.14;
@@ -32,12 +32,12 @@
 }
 
 .info__button:hover {
-  opacity: 50%;
+  opacity: 60%;
 }
 
 .info__job-title {
-  font-family: "InterRegular", sans-serif;
-  font-weight: normal;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
   color: #fff;
   font-size: 18px;
   line-height: 1.22;
@@ -52,11 +52,13 @@
 
 @media all and (max-width: 1042px) {
   .info {
+    grid-template-columns: minmax(auto, 300px) auto;
     margin-left: 15px;
   }
 
   .info__name {
     font-size: 32px;
+    line-height: 38px;
   }
 }
 
@@ -71,7 +73,12 @@
 
   .info__name {
     font-size: 22px;
+    line-height: 28px;
     padding-bottom: 10px;
+    width: 75%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .info__button {

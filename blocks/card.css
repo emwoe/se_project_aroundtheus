@@ -1,7 +1,7 @@
 .card {
   width: 282px;
   background-color: #fff;
-  border-radius: 10%;
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -22,8 +22,16 @@
 }
 
 .card__name {
+  margin: 25px 0 25px 20px;
   font-size: 24px;
-  font-family: "InterBlack", sans-serif;
+  /*
+Was asked to change line height to match Figma --
+but Figma just says "auto" and I can't find any
+information on Inter that lists a standard line-height
+  */
+  line-height: 28px;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
   margin-left: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -35,11 +43,11 @@
   background-image: url(../images/HeartVector.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #ffffff;
+  background-color: rgba(225, 225, 225, 0);
   border: none;
   height: 18px;
   width: 21px;
-  margin-top: 25px;
+  margin-top: 31px;
   margin-right: 20px;
   transition: background-image 1s ease-in;
   cursor: pointer;

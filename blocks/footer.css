@@ -7,7 +7,10 @@
   font-family: "Inter Regular", sans-serif;
   color: #545454;
   font-size: 18px;
-  line-height: auto;
+  /*
+No line-height provided in Figma.
+*/
+  line-height: 22px;
   margin-top: 0px;
   margin-bottom: 60px;
   max-width: fit-content;
@@ -20,6 +23,7 @@
 
   .footer__copyright {
     font-size: 16px;
+    line-height: 20px;
   }
 }
 

@@ -5,17 +5,18 @@
   align-content: space-between;
   justify-content: center;
   padding-top: 45px;
-  width: 85%;
+  width: 880px;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0;
   border-bottom: solid 1px;
-  border-color: #d9d9d9;
+  border-color: #545454;
 }
 
 .header__logo {
   height: 33px;
   width: 173px;
   margin-bottom: 41px;
+  padding-left: 0;
 }
 
 @media all and (max-width: 1042px) {
@@ -27,5 +28,11 @@
 @media all and (max-width: 700px) {
   .header {
     width: 100%;
+    padding-left: 22px;
+  }
+
+  .header__logo {
+    height: 26px;
+    margin-bottom: 32px;
   }
 }

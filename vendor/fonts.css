@@ -1,27 +1,20 @@
-/*
-NOTE TO REVIEWER: I got a comment about using 'Inter' for
-all of the fonts, since they are the same family.
-This didn't work and I reverted to using 3 different calls
-with distinct font family names.
-*/
-
 @font-face {
-  font-family: "InterRegular";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   src: url("fonts/Inter-Regular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "InterMedium";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   src: url("fonts/Inter-Medium.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "InterBlack";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: bold;
+  font-weight: 900;
   src: url("fonts/Inter-Black.woff2") format("woff2");
 }
