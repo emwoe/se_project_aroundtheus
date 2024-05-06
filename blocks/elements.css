@@ -6,9 +6,6 @@
   row-gap: 20px;
   padding: 51px 0 67px 0;
   max-width: 880px;
-  /*
-  margin: 0 auto;
-  */
 }
 
 @media all and (max-width: 1092px) {

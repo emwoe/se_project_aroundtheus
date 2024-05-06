@@ -1,9 +1,9 @@
 .profile {
+  width: 880px;
   padding-top: 40px;
   background-color: #000;
   display: flex;
   flex-wrap: nowrap;
-  width: 100%;
 }
 
 .profile__circle {
@@ -33,13 +33,13 @@
   opacity: 60%;
 }
 
-@media all and (max-width: 1042px) {
-  .profile__button {
-    margin-left: 5vw;
+@media all and (max-width: 1000px) {
+  .profile {
+    width: 100%;
   }
 }
 
-@media all and (max-width: 700px) {
+@media all and (max-width: 745px) {
   .profile {
     flex-direction: column;
     justify-content: center;
