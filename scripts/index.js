@@ -1,15 +1,15 @@
 let initialCards = [
-   {
-        "name": "Austin",
-        "link": URL(https://unsplash.com/photos/river-near-buildings-during-daytime-wKfTNWaDYgs)
-    }
-
+    {
+        name: "Austin",
+        link: URL(https://unsplash.com/photos/river-near-buildings-during-daytime-wKfTNWaDYgs),
+       },
+   {"name": "Austin",
+"link": URL(https://unsplash.com/photos/river-near-buildings-during-daytime-wKfTNWaDYgs)
     },
     {
         "name": "New York",
         "link": URL(https://unsplash.com/photos/cars-parked-near-brown-building-wOj5odhDOZ0)
     },
-
     {
         "name": "San Francisco",
         "link": URL(https://unsplash.com/photos/san-franciscos-downhill-winding-street-AFlG5jpMvYg)
