@@ -24,11 +24,6 @@
 .card__name {
   margin: 25px 0 25px 20px;
   font-size: 24px;
-  /*
-Was asked to change line height to match Figma --
-but Figma just says "auto" and I can't find any
-information on Inter that lists a standard line-height
-  */
   line-height: 28px;
   font-family: "Inter", sans-serif;
   font-weight: 900;

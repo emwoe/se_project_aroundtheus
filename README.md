@@ -12,4 +12,6 @@ This is the beginning of a travel website that will allow users to edit the pers
 
 **Reflection Video**
 
-You can find a video of me talking through the process and challenges of creating this website here: [Link to video]
+You can find a video of me talking through the process and challenges of creating this website here: [Link to video] (https://stedwards.zoom.us/rec/share/5xkCgz9vh6rPMpfTmj7dv9zBvqEf4RvYC53Vhh3Xw_PqJNH2GpdT-uWC56Tfbt6T.HQsz4a0EwO9EPcZv)
+
+Passcode: $?lh5.? with an asterix at the end.
