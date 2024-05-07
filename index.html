@@ -13,6 +13,26 @@
     <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body class="page">
+    <div class="modal modal_opened">
+      <form class="modal__container">
+        <button class="modal__close-button"></button>
+        <h2 class="modal__title">Edit Profile</h2>
+
+        <input
+          id="name"
+          class="modal__name"
+          type="text"
+          placeholder="Jacques Cousteau"
+        />
+        <input
+          id="job-description"
+          class="modal__job"
+          type="text"
+          placeholder="Explorer"
+        />
+        <button class="modal__save-button">Save</button>
+      </form>
+    </div>
     <header class="header">
       <img
         class="header__logo"
@@ -100,6 +120,7 @@
         </div>
       </section>
     </main>
+
     <footer class="footer">
       <p class="footer__copyright">© 2024 Around The U.S.</p>
     </footer>
