@@ -25,3 +25,20 @@ const initialCards = [
     link: "https://unsplash.com/photos/a-vertical-drone-view-of-the-downtown-atlanta-with-modern-buildings-and-a-large-green-park-georgia-AfnosnmGhtA",
   },
 ];
+
+let modalBox = document.querySelector(".modal");
+let modalEditBtn = document.querySelector(".info__button");
+let modalCloseBtn = document.querySelector(".modal__close-button");
+
+function modalOpen() {
+  modalBox.classList.remove("modal");
+  modalBox.classList.add("modal_opened");
+}
+
+function modalClose() {
+  modalBox.classList.add("modal");
+  modalBox.classList.remove("modal_opened");
+}
+
+modalEditBtn.addEventListener("click", modalOpen);
+modalCloseBtn.addEventListener("click", modalClose);
