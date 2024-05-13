@@ -1,7 +1,7 @@
 const initialCards = [
   {
     name: "Austin",
-    link: "images/card-images/Austin.jpg",
+    link: "images/card-images/Austin.JPG",
   },
   {
     name: "New York",
