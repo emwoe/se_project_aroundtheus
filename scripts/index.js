@@ -27,27 +27,28 @@ const initialCards = [
 ];
 
 const cardArea = document.querySelector(".elements");
-
 const cardTemplate = document.querySelector("#localeCard").content;
 
 function createCardElement(data) {
   cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImageLink = initialCards[i].link;
-  const cardName = initialCards[i].name;
+  const cardImageLink = data.link;
+  const cardName = data.name;
   const templateName = cardElement.querySelector(".card__name");
   const templateImg = cardElement.querySelector(".card__image");
   templateName.textContent = cardName;
   templateImg.src = cardImageLink;
   templateImg.alt = cardName;
+  return cardElement;
 }
 
-function getCardElement(data) {
-  for (i = 0; i < initialCards.length; i++) {
-    createCardElement(data);
+function renderCardElement(data) {
+  for (i = 0; i < data.length; i++) {
+    createCardElement(data[i]);
     cardArea.prepend(cardElement);
   }
 }
-getCardElement();
+
+renderCardElement(initialCards);
 
 const modalBox = document.querySelector(".modal");
 const modalEditBtn = document.querySelector(".info__button");
