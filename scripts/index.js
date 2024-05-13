@@ -1,37 +1,42 @@
 const initialCards = [
   {
     name: "Austin",
-    link: "../images/card-images/Austin.jpg",
+    link: "images/card-images/Austin.jpg",
   },
   {
     name: "New York",
-    link: "../images/card-images/NewYork.jpg",
+    link: "images/card-images/NewYork.jpg",
   },
   {
     name: "San Francisco",
-    link: "../images/card-images/SanFran.jpg",
+    link: "images/card-images/SanFran.jpg",
   },
 
   {
     name: "Kansas City",
-    link: "../images/card-images/KansasCity.jpg",
+    link: "images/card-images/KansasCity.jpg",
   },
   {
     name: "Chicago",
-    link: "../images/card-images/Chicago.jpg",
+    link: "images/card-images/Chicago.jpg",
   },
   {
     name: "Atlanta",
-    link: "../images/card-images/Atlanta.jpg",
+    link: "images/card-images/Atlanta.jpg",
   },
 ];
 
 let cardArea = document.querySelector(".elements");
+
 let cardTemplate = document.querySelector("#localeCard").content;
+
+function createCardTemplate() {
+  cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+}
 
 function getCardElement() {
   for (i = 0; i < initialCards.length; i++) {
-    let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+    createCardTemplate();
     let cardImageLink = initialCards[i].link;
     let cardName = initialCards[i].name;
     cardElement.querySelector(".card__name").textContent = cardName;
@@ -53,7 +58,6 @@ const profileJob = document.querySelector(".info__job-title");
 const modalJob = document.querySelector(".modal__job");
 
 function modalOpen() {
-  modalBox.classList.remove("modal");
   modalBox.classList.add("modal_opened");
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
@@ -61,7 +65,6 @@ function modalOpen() {
 
 function modalClose(evt) {
   evt.preventDefault();
-  modalBox.classList.add("modal");
   modalBox.classList.remove("modal_opened");
 }
 
