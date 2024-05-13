@@ -41,14 +41,14 @@ function createCardElement(data) {
   return cardElement;
 }
 
-function renderCardElement(data) {
+function renderCardElements(data) {
   for (i = 0; i < data.length; i++) {
-    createCardElement(data[i]);
+    const cardElement = createCardElement(data[i]);
     cardArea.prepend(cardElement);
   }
 }
 
-renderCardElement(initialCards);
+renderCardElements(initialCards);
 
 const modalBox = document.querySelector(".modal");
 const modalEditBtn = document.querySelector(".info__button");
