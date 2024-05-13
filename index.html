@@ -32,7 +32,7 @@
           type="text"
           placeholder="Description"
         />
-        <button class="modal__save-button">Save</button>
+        <button class="modal__save-button" type="submit">Save</button>
       </form>
     </div>
     <main class="content">
@@ -47,28 +47,30 @@
         <button class="profile__button" type="button"></button>
       </section>
       <section class="elements">
+        <template id="localeCard">
         <div class="card">
           <img
             class="card__image"
-            src="images/card-images/yosemite.jpg"
-            alt="Yosmite Valley"
           />
           <div class="card__label">
-            <h2 class="card__name">Yosemite Valley</h2>
+            <h2 class="card__name"></h2>
             <button type="button" class="card__heart"></button>
           </div>
+        </template>
+        <!--
         </div>
-        <div class="card">
-          <img
-            class="card__image"
-            src="images/card-images/lake-louise.jpg"
-            alt="Lake Louise"
-          />
-          <div class="card__label">
-            <h2 class="card__name">Lake Louise</h2>
-            <button type="button" class="card__heart"></button>
+          <div class="card">
+            <img
+              class="card__image"
+              src="images/card-images/lake-louise.jpg"
+              alt="Lake Louise"
+            />
+            <div class="card__label">
+              <h2 class="card__name">Lake Louise</h2>
+              <button type="button" class="card__heart"></button>
+            </div>
           </div>
-        </div>
+
         <div class="card">
           <img
             class="card__image"
@@ -112,6 +114,7 @@
             <h2 class="card__name">Lago di Braies</h2>
             <button type="button" class="card__heart"></button>
           </div>
+          -->
         </div>
       </section>
     </main>
