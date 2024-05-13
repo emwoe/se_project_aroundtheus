@@ -42,7 +42,7 @@ function createCardElement(data) {
 }
 
 function renderCardElements(data) {
-  for (i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     const cardElement = createCardElement(data[i]);
     cardArea.prepend(cardElement);
   }
