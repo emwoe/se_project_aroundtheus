@@ -27,6 +27,10 @@
   background-color: white;
 }
 
+.modal__wrapper {
+  position: relative;
+}
+
 .modal__close-button {
   position: absolute;
   top: -40px;
@@ -55,11 +59,11 @@
   line-height: 29px;
 }
 
-.modal__name {
-  width: 358px;
+.modal__input {
+  width: 83.25%;
+  margin: 0 auto 29.74px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 auto 29.74px auto;
   font-family: "Inter", sans-serif;
   color: black;
   font-weight: 400;
@@ -68,30 +72,20 @@
   padding-bottom: 13px;
 }
 
-.modal__job {
-  width: 358px;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-  font-family: "Inter", sans-serif;
-  color: black;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16.94px;
-  padding-bottom: 13px;
+.modal__input:last-of-type {
+  margin-bottom: 48px;
 }
 
 .modal__save-button {
-  width: 258px;
+  width: 83.25%;
   background-color: black;
   font-family: "Inter", sans-serif;
   color: white;
-  width: 358px;
   height: 50.15px;
   border: none;
   border-radius: 2px;
   text-align: center;
-  margin: 48px auto 0;
+  margin: 0 auto 0;
   cursor: pointer;
 }
 
@@ -113,20 +107,20 @@
     margin-bottom: 76px;
   }
 
-  .modal__name {
-    width: 238px;
+  .modal__input {
+    width: 84.3%;
+    margin: 0 auto 30px;
     padding-bottom: 9px;
   }
 
-  .modal__job {
-    width: 238px;
-    padding-bottom: 9px;
+  .modal__input:last-of-type {
+    margin-bottom: 45px;
   }
 
   .modal__save-button {
-    width: 238px;
+    width: 84.3%;
+    margin: 0 auto 13px;
     height: 46px;
-    margin-top: 46px;
     font-size: 14px;
     line-height: 16.94px;
   }

@@ -1,7 +1,7 @@
 const initialCards = [
   {
     name: "Austin",
-    link: "images/card-images/Austin.JPG",
+    link: "images/card-images/Austin.jpg",
   },
   {
     name: "New York",
@@ -26,23 +26,25 @@ const initialCards = [
   },
 ];
 
-let cardArea = document.querySelector(".elements");
+const cardArea = document.querySelector(".elements");
 
 let cardTemplate = document.querySelector("#localeCard").content;
 
-function createCardTemplate() {
+function createCardElement() {
   cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 }
 
 function getCardElement() {
   for (i = 0; i < initialCards.length; i++) {
-    createCardTemplate();
+    createCardElement();
     let cardImageLink = initialCards[i].link;
     let cardName = initialCards[i].name;
-    cardElement.querySelector(".card__name").textContent = cardName;
-    cardElement.querySelector(".card__image").src = cardImageLink;
-    cardElement.querySelector(".card__image").alt = cardName;
-    cardArea.append(cardElement);
+    let templateName = cardElement.querySelector(".card__name");
+    let templateImg = cardElement.querySelector(".card__image");
+    templateName.textContent = cardName;
+    templateImg.src = cardImageLink;
+    templateImg.alt = cardName;
+    cardArea.prepend(cardElement);
   }
 }
 getCardElement();
@@ -53,18 +55,17 @@ const modalCloseBtn = document.querySelector(".modal__close-button");
 const modalForm = document.querySelector(".modal__container");
 
 const profileName = document.querySelector(".info__name");
-const modalName = document.querySelector(".modal__name");
+const modalName = document.querySelector("#name");
 const profileJob = document.querySelector(".info__job-title");
-const modalJob = document.querySelector(".modal__job");
+const modalJob = document.querySelector("#job-description");
 
-function modalOpen() {
+function openModal() {
   modalBox.classList.add("modal_opened");
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
 }
 
-function modalClose(evt) {
-  evt.preventDefault();
+function closeModal(evt) {
   modalBox.classList.remove("modal_opened");
 }
 
@@ -72,10 +73,9 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = modalName.value;
   profileJob.textContent = modalJob.value;
-  modalBox.classList.add("modal");
-  modalBox.classList.remove("modal_opened");
+  closeModal();
 }
 
-modalEditBtn.addEventListener("click", modalOpen);
-modalCloseBtn.addEventListener("click", modalClose);
+modalEditBtn.addEventListener("click", openModal);
+modalCloseBtn.addEventListener("click", closeModal);
 modalForm.addEventListener("submit", handleProfileFormSubmit);
