@@ -28,22 +28,22 @@ const initialCards = [
 
 const cardArea = document.querySelector(".elements");
 
-let cardTemplate = document.querySelector("#localeCard").content;
+const cardTemplate = document.querySelector("#localeCard").content;
 
-function createCardElement() {
+function createCardElement(data) {
   cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardImageLink = initialCards[i].link;
+  const cardName = initialCards[i].name;
+  const templateName = cardElement.querySelector(".card__name");
+  const templateImg = cardElement.querySelector(".card__image");
+  templateName.textContent = cardName;
+  templateImg.src = cardImageLink;
+  templateImg.alt = cardName;
 }
 
-function getCardElement() {
+function getCardElement(data) {
   for (i = 0; i < initialCards.length; i++) {
-    createCardElement();
-    let cardImageLink = initialCards[i].link;
-    let cardName = initialCards[i].name;
-    let templateName = cardElement.querySelector(".card__name");
-    let templateImg = cardElement.querySelector(".card__image");
-    templateName.textContent = cardName;
-    templateImg.src = cardImageLink;
-    templateImg.alt = cardName;
+    createCardElement(data);
     cardArea.prepend(cardElement);
   }
 }
