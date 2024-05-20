@@ -98,20 +98,6 @@ function handleImageFormSubmit(evt) {
   cardArea.prepend(newCard);
   closeImageModal();
 }
-const cardHeartBtns = document.querySelectorAll(".card__heart");
-cardHeartBtns.forEach((btn) => {
-  btn.addEventListener("click", (evt) => {
-    btn.classList.toggle("card__heart-option-liked");
-  });
-});
-
-const cardDeleteBtns = document.querySelectorAll(".card__delete-btn");
-cardDeleteBtns.forEach((btn) => {
-  btn.addEventListener("click", (evt) => {
-    btn.closest(".card").remove();
-  });
-});
-
 const cardImages = document.querySelectorAll(".card__image");
 const cardImagePopOut = document.querySelector(".modal_type_image-pop-out");
 const cardImagePopOutWrapper = document.querySelector(
@@ -122,9 +108,16 @@ const cardImagePopOutCloseBtn = document.querySelector(
 );
 const imageCaption = document.createElement("p");
 
-cardImages.forEach((btn) => {
-  btn.addEventListener("click", (evt) => {
-    imagePopOut = btn.cloneNode(true);
+cardArea.addEventListener("click", (evt) => {
+  const eventTarget = evt.target;
+  if (eventTarget.classList.contains("card__heart")) {
+    eventTarget.classList.toggle("card__heart-option-liked");
+  }
+  if (eventTarget.classList.contains("card__delete-btn")) {
+    eventTarget.closest(".card").remove();
+  }
+  if (eventTarget.classList.contains("card__image")) {
+    imagePopOut = eventTarget.cloneNode(true);
     imagePopOut.classList.add("card__image_option_pop-out");
     imagePopOut.classList.remove("card__image");
     cardImagePopOut.classList.add("modal_opened");
@@ -132,7 +125,7 @@ cardImages.forEach((btn) => {
     imageCaption.textContent = imagePopOut.alt;
     imageCaption.classList.add("card__pop-out_caption");
     cardImagePopOutWrapper.append(imageCaption);
-  });
+  }
 });
 
 function closeImagePopOut(evt) {
