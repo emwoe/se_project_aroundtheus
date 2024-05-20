@@ -68,6 +68,14 @@
         </form>
       </div>
     </div>
+    <div class="modal modal_type_image-pop-out">
+      <div class="modal__wrapper modal__wrapper_type_image-pop-out">
+        <button
+          class="modal__close-button modal__close-button_type-image-pop-out"
+          type="button"
+        ></button>
+      </div>
+    </div>
     <main class="content">
       <section class="profile">
         <div class="profile__circle"></div>
@@ -82,7 +90,10 @@
       <section class="elements">
         <template id="localeCard">
           <div class="card">
-            <img class="card__image" />
+            <div class="card__image-overlay">
+              <button type="button" class="card__delete-btn"></button>
+              <img class="card__image" />
+            </div>
             <div class="card__label">
               <h2 class="card__name"></h2>
               <button type="button" class="card__heart"></button>

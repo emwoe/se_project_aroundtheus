@@ -46,17 +46,6 @@ initialCards.forEach(function (data) {
   cardArea.prepend(cardElement);
 });
 
-/* Replaced for loop:
-{
-  for (let i = 0; i < data.length; i++) {
-    const cardElement = createCardElement(data[i]);
-    cardArea.prepend(cardElement);
-  }
-}
-
-renderCardElements(initialCards);
-*/
-
 const modalProfile = document.querySelector(".modal_type_profile");
 const modalProfileEditBtn = document.querySelector(".info__button");
 const modalProfileCloseBtn = modalProfile.querySelector(".modal__close-button");
@@ -100,23 +89,6 @@ function handleProfileFormSubmit(evt) {
   closeProfileModal();
 }
 
-/*
-function handleImageFormSubmit(evt) {
-  evt.preventDefault();
-  closeImageModal();
-  let newCardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const newImageLink = modalImageLink;
-  const newCardName = modalImageTitle;
-  const newTemplateName = cardElement.querySelector(".card__name");
-  const newTemplateImg = cardElement.querySelector(".card__image");
-  newTemplateName.textContent = newCardName;
-  newTemplateImg.src = newImageLink;
-  newTemplateImg.alt = newCardName;
-  return newCardElement;
-}
-
-*/
-
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
   let newData = {};
@@ -126,6 +98,50 @@ function handleImageFormSubmit(evt) {
   cardArea.prepend(newCard);
   closeImageModal();
 }
+const cardHeartBtns = document.querySelectorAll(".card__heart");
+cardHeartBtns.forEach((btn) => {
+  btn.addEventListener("click", (evt) => {
+    btn.classList.toggle("card__heart-option-liked");
+  });
+});
+
+const cardDeleteBtns = document.querySelectorAll(".card__delete-btn");
+cardDeleteBtns.forEach((btn) => {
+  btn.addEventListener("click", (evt) => {
+    btn.closest(".card").remove();
+  });
+});
+
+const cardImages = document.querySelectorAll(".card__image");
+const cardImagePopOut = document.querySelector(".modal_type_image-pop-out");
+const cardImagePopOutWrapper = document.querySelector(
+  ".modal__wrapper_type_image-pop-out"
+);
+const cardImagePopOutCloseBtn = document.querySelector(
+  ".modal__close-button_type-image-pop-out"
+);
+const imageCaption = document.createElement("p");
+
+cardImages.forEach((btn) => {
+  btn.addEventListener("click", (evt) => {
+    imagePopOut = btn.cloneNode(true);
+    imagePopOut.classList.add("card__image_option_pop-out");
+    imagePopOut.classList.remove("card__image");
+    cardImagePopOut.classList.add("modal_opened");
+    cardImagePopOutWrapper.append(imagePopOut);
+    imageCaption.textContent = imagePopOut.alt;
+    imageCaption.classList.add("card__pop-out_caption");
+    cardImagePopOutWrapper.append(imageCaption);
+  });
+});
+
+function closeImagePopOut(evt) {
+  cardImagePopOut.classList.toggle("modal_opened");
+  imagePopOut.remove();
+  imageCaption.remove();
+}
+
+cardImagePopOutCloseBtn.addEventListener("click", closeImagePopOut);
 
 modalProfileEditBtn.addEventListener("click", openProfileModal);
 modalProfileCloseBtn.addEventListener("click", closeProfileModal);

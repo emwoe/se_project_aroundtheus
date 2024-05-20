@@ -7,9 +7,43 @@
   flex-direction: column;
 }
 
+.card__image-overlay {
+  position: relative;
+}
+
+.card__delete-btn {
+  background-image: url(../images/Trash.svg);
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  background-color: rgba(225, 225, 225, 0);
+  cursor: pointer;
+}
+
+.card__delete-btn:hover {
+  opacity: 60%;
+}
+
 .card__image {
   height: 282px;
   width: 282px;
+}
+
+.card__image_option_pop-out {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.card__pop-out_caption {
+  font-family: "Inter", sans-serif;
+  font-weight: 400px;
+  font-size: 12px;
+  line-height: 14.52px;
+  margin-top: 10px;
+  color: white;
 }
 
 .card__label {
@@ -19,6 +53,7 @@
   padding-top: 6px;
   padding-bottom: 6px;
   justify-content: space-between;
+  padding: 0;
 }
 
 .card__name {
@@ -50,4 +85,8 @@
 
 .card__heart:hover {
   opacity: 50%;
+}
+
+.card__heart-option-liked {
+  background-image: url(../images/Union.svg);
 }
