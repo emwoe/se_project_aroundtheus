@@ -27,6 +27,9 @@
   opacity: 60%;
 }
 
+.card__image_container {
+  margin: 0;
+}
 .card__image {
   height: 282px;
   width: 282px;
