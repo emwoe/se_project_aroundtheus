@@ -58,9 +58,7 @@ const cardImagePopOutCloseBtn = document.querySelector(
 );
 const cardImagePopOutCaption = document.querySelector(".card__pop-out_caption");
 
-/* functions to create cards and event listeners within cards
-I tried using querySelectorAll and forEach to select all of the buttons of a certain class,
-but the event listeners lost their functionality for the new cards*/
+/* functions to create cards */
 
 function createCardElement(data) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -68,9 +66,14 @@ function createCardElement(data) {
   const cardName = data.name;
   const templateName = cardElement.querySelector(".card__name");
   const templateImg = cardElement.querySelector(".card__image");
+  const templateHeart = cardElement.querySelector(".card__heart");
+  const templateDltBtn = cardElement.querySelector(".card__delete-btn");
   templateName.textContent = cardName;
   templateImg.src = cardImageLink;
   templateImg.alt = cardName;
+  templateImg.addEventListener("click", openModalImage);
+  templateHeart.addEventListener("click", handleCardHeart);
+  templateDltBtn.addEventListener("click", deleteCard);
   return cardElement;
 }
 
@@ -88,27 +91,28 @@ function handleImageFormSubmit(evt) {
   cardArea.prepend(newCard);
   modalImageTitle.value = "";
   modalImageLink.value = "";
+  closePopUp(modalImage);
+}
+/* functions for card event listeners */
+
+function handleCardHeart(evt) {
+  evt.target.classList.toggle("card__heart-option-liked");
 }
 
-cardArea.addEventListener("click", (evt) => {
-  const eventTarget = evt.target;
-  if (eventTarget.classList.contains("card__heart")) {
-    eventTarget.classList.toggle("card__heart-option-liked");
-  }
-  if (eventTarget.classList.contains("card__delete-btn")) {
-    eventTarget.closest(".card").remove();
-  }
-  if (eventTarget.classList.contains("card__image")) {
-    imagePopOut = eventTarget.cloneNode(true);
-    imagePopOut.classList.add("card__image_option_pop-out");
-    imagePopOut.classList.remove("card__image");
-    cardImagePopOut.classList.add("modal_opened");
-    cardImagePopOutWrapper.prepend(imagePopOut);
-    cardImagePopOutCaption.textContent = imagePopOut.alt;
-  }
-});
+function deleteCard(evt) {
+  evt.target.closest(".card").remove();
+}
 
-/* Create other event listeners */
+function openModalImage(evt) {
+  imagePopOut = evt.target.cloneNode(true);
+  imagePopOut.classList.add("card__image_option_pop-out");
+  imagePopOut.classList.remove("card__image");
+  cardImagePopOut.classList.add("modal_opened");
+  cardImagePopOutWrapper.prepend(imagePopOut);
+  cardImagePopOutCaption.textContent = imagePopOut.alt;
+}
+
+/* create other event listeners */
 
 cardImagePopOutCloseBtn.addEventListener("click", closeImagePopOut);
 
@@ -151,7 +155,6 @@ function closeImageModal(evt) {
 function closeImagePopOut(evt) {
   closePopUp(cardImagePopOut);
   imagePopOut.remove();
-  imageCaption.remove();
 }
 
 /* function to handle profile edit */
