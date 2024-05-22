@@ -104,12 +104,10 @@ function deleteCard(evt) {
 }
 
 function openModalImage(evt) {
-  imagePopOut = evt.target.cloneNode(true);
-  imagePopOut.classList.add("card__image_option_pop-out");
-  imagePopOut.classList.remove("card__image");
-  cardImagePopOut.classList.add("modal_opened");
-  cardImagePopOutWrapper.prepend(imagePopOut);
-  cardImagePopOutCaption.textContent = imagePopOut.alt;
+  const imagePopOut = document.querySelector(".card__image_option_pop-out");
+  imagePopOut.src = evt.target.src;
+  cardImagePopOutCaption.textContent = evt.target.alt;
+  openPopUp(cardImagePopOut);
 }
 
 /* create other event listeners */
