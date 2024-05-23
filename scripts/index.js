@@ -106,6 +106,7 @@ function deleteCard(evt) {
 function openModalImage(evt) {
   const imagePopOut = document.querySelector(".card__image_option_pop-out");
   imagePopOut.src = evt.target.src;
+  imagePopOut.alt = evt.target.alt;
   cardImagePopOutCaption.textContent = evt.target.alt;
   openPopUp(cardImagePopOut);
 }
@@ -152,8 +153,10 @@ function closeImageModal(evt) {
 
 function closeImagePopOut(evt) {
   closePopUp(cardImagePopOut);
-  imagePopOut.remove();
 }
+/*
+  cardImagePopOut.remove();
+  */
 
 /* function to handle profile edit */
 
