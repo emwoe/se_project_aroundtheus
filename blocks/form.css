@@ -1,0 +1,21 @@
+.form__input {
+  margin-bottom: 5px;
+}
+
+.form__input_type_error {
+  margin-bottom: 5px;
+  border-bottom: solid 1px red;
+}
+
+.form__input-error_active {
+  color: red;
+  margin-left: 36px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+}
+
+.form__input-error:last-of-type {
+  margin-bottom: 31px;
+}
