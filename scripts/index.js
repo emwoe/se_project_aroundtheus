@@ -91,6 +91,9 @@ function handleImageFormSubmit(evt) {
   cardArea.prepend(newCard);
   modalImageTitle.value = "";
   modalImageLink.value = "";
+  const imgFormSubmitBtn = modalImageForm.querySelector(".modal__save-button");
+  imgFormSubmitBtn.disabled = true;
+  imgFormSubmitBtn.classList.add("form__button_inactive");
   closePopUp(modalImage);
 }
 /* functions for card event listeners */
@@ -137,6 +140,10 @@ function openProfileModal() {
   openPopUp(modalProfile);
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
+  const profileSaveBtn = modalProfileForm.querySelector(".modal__save-button");
+  profileSaveBtn.disabled = false;
+  profileSaveBtn.classList.remove("form__button_inactive");
+  console.log("15");
 }
 
 function openImageModal() {
@@ -154,9 +161,6 @@ function closeImageModal(evt) {
 function closeImagePopOut(evt) {
   closePopUp(cardImagePopOut);
 }
-/*
-  cardImagePopOut.remove();
-  */
 
 /* function to handle profile edit */
 
