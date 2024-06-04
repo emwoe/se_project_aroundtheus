@@ -162,6 +162,46 @@ function closeImagePopOut(evt) {
   closePopUp(cardImagePopOut);
 }
 
+/* Allow users to click anywhere outside of modal or press ESC to close modal */
+
+function stopBubble(evt) {
+  evt.stopPropagation();
+}
+
+function setClickListenersToClose() {
+  const modalList = Array.from(document.querySelectorAll(".modal"));
+  const modalWrapperList = Array.from(
+    document.querySelectorAll(".modal__wrapper")
+  );
+  modalList.forEach((modalElement) => {
+    document.addEventListener("keydown", function (evt) {
+      if (evt.key === "Escape") {
+        modalElement.classList.remove("modal_opened");
+      }
+    });
+
+    modalElement.addEventListener("click", () => {
+      modalElement.classList.remove("modal_opened");
+    });
+  });
+  modalWrapperList.forEach((modalWrapperElement) => {
+    modalWrapperElement.addEventListener("click", stopBubble);
+  });
+}
+
+setClickListenersToClose();
+
+/*
+  console.log(modalList);
+  console.log(modalWrapperList);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      checkInputValidity(formElement, inputElement);
+}
+*/
+
+setClickListenersToClose();
+
 /* function to handle profile edit */
 
 function handleProfileFormSubmit(evt) {
