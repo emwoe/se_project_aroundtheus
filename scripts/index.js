@@ -143,7 +143,6 @@ function openProfileModal() {
   const profileSaveBtn = modalProfileForm.querySelector(".modal__save-button");
   profileSaveBtn.disabled = false;
   profileSaveBtn.classList.remove("form__button_inactive");
-  console.log("15");
 }
 
 function openImageModal() {
