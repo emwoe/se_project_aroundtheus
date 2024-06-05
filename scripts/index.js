@@ -191,17 +191,6 @@ function setClickListenersToClose() {
 
 setClickListenersToClose();
 
-/*
-  console.log(modalList);
-  console.log(modalWrapperList);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      checkInputValidity(formElement, inputElement);
-}
-*/
-
-setClickListenersToClose();
-
 /* function to handle profile edit */
 
 function handleProfileFormSubmit(evt) {
@@ -278,3 +267,12 @@ const enableValidation = () => {
 };
 
 enableValidation();
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+});
