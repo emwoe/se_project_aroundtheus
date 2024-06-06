@@ -89,12 +89,15 @@ function handleImageFormSubmit(evt) {
   newData.link = modalImageLink.value;
   const newCard = createCardElement(newData);
   cardArea.prepend(newCard);
-  modalImageTitle.value = "";
-  modalImageLink.value = "";
-  const imgFormSubmitBtn = modalImageForm.querySelector(".modal__save-button");
-  imgFormSubmitBtn.disabled = true;
-  imgFormSubmitBtn.classList.add("form__button_inactive");
+  console.log(modalImageForm);
+  console.log(newData);
+  modalImageForm.reset();
   closePopUp(modalImage);
+  const imgFormSubmitBtn = modalImageForm.querySelector(".modal__save-button");
+  const resetInputList = Array.from(
+    modalImageForm.querySelectorAll(".modal__input")
+  );
+  toggleButtonState(resetInputList, imgFormSubmitBtn);
 }
 /* functions for card event listeners */
 
@@ -108,6 +111,7 @@ function deleteCard(evt) {
 
 function openModalImage(evt) {
   const imagePopOut = document.querySelector(".card__image_option_pop-out");
+  cardImagePopOut.addEventListener("mousedown", closeModalOnRemoteClick);
   imagePopOut.src = evt.target.src;
   imagePopOut.alt = evt.target.alt;
   cardImagePopOutCaption.textContent = evt.target.alt;
@@ -138,57 +142,83 @@ function closePopUp(elem) {
 
 function openProfileModal() {
   openPopUp(modalProfile);
+  modalProfile.addEventListener("mousedown", closeModalOnRemoteClick);
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
+  document.addEventListener("keydown", closeModalByEscape);
   const profileSaveBtn = modalProfileForm.querySelector(".modal__save-button");
-  profileSaveBtn.disabled = false;
-  profileSaveBtn.classList.remove("form__button_inactive");
+  const openProfileInputList = Array.from(
+    modalProfile.querySelectorAll(".modal__input")
+  );
+  toggleButtonState(openProfileInputList, profileSaveBtn);
 }
 
 function openImageModal() {
   openPopUp(modalImage);
+  document.addEventListener("keydown", closeModalByEscape);
+  modalImage.addEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closeProfileModal(evt) {
   closePopUp(modalProfile);
+  document.removeEventListener("keydown", closeModalByEscape);
+  modalProfile.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closeImageModal(evt) {
   closePopUp(modalImage);
+  document.removeEventListener("keydown", closeModalByEscape);
+  modalImage.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closeImagePopOut(evt) {
   closePopUp(cardImagePopOut);
+  document.removeEventListener("keydown", closeModalByEscape);
+  cardImagePopOut.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 /* Allow users to click anywhere outside of modal or press ESC to close modal */
 
+/*
 function stopBubble(evt) {
   evt.stopPropagation();
 }
+*/
 
+function closeModalByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closePopUp(openedModal);
+  }
+}
+
+function closeModalOnRemoteClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopUp(evt.currentTarget);
+    console.log("15");
+  }
+}
+/*
 function setClickListenersToClose() {
   const modalList = Array.from(document.querySelectorAll(".modal"));
   const modalWrapperList = Array.from(
     document.querySelectorAll(".modal__wrapper")
   );
   modalList.forEach((modalElement) => {
-    document.addEventListener("keydown", function (evt) {
-      if (evt.key === "Escape") {
-        modalElement.classList.remove("modal_opened");
-      }
-    });
-
     modalElement.addEventListener("click", () => {
       modalElement.classList.remove("modal_opened");
     });
   });
+ 
   modalWrapperList.forEach((modalWrapperElement) => {
     modalWrapperElement.addEventListener("click", stopBubble);
   });
-}
+
+
+
 
 setClickListenersToClose();
+ */
 
 /* function to handle profile edit */
 
@@ -198,80 +228,3 @@ function handleProfileFormSubmit(evt) {
   profileJob.textContent = modalJob.value;
   closePopUp(modalProfile);
 }
-
-/* Validate forms */
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(
-    `.${inputElement.id}-input-error`
-  );
-  inputElement.classList.add("form__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(
-    `.${inputElement.id}-input-error`
-  );
-  inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("form__button_inactive");
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.classList.remove("form__button_inactive");
-    buttonElement.disabled = false;
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
-  const buttonElement = formElement.querySelector(".modal__save-button");
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".form"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
-enableValidation();
-
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-});
