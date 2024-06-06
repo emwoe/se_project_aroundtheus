@@ -145,6 +145,14 @@ function openProfileModal() {
   modalProfile.addEventListener("mousedown", closeModalOnRemoteClick);
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
+  modalName.classList.remove("modal__input_type_error");
+  modalJob.classList.remove("modal__input_type_error");
+  const errorSpanList = Array.from(
+    modalProfileForm.querySelectorAll(".modal__input-error")
+  );
+  errorSpanList.forEach((errorSpan) => {
+    errorSpan.textContent = "";
+  });
 
   const profileSaveBtn = modalProfileForm.querySelector(".modal__save-button");
   const openProfileInputList = Array.from(
