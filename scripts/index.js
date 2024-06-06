@@ -206,27 +206,6 @@ function closeModalOnRemoteClick(evt) {
     console.log("15");
   }
 }
-/*
-function setClickListenersToClose() {
-  const modalList = Array.from(document.querySelectorAll(".modal"));
-  const modalWrapperList = Array.from(
-    document.querySelectorAll(".modal__wrapper")
-  );
-  modalList.forEach((modalElement) => {
-    modalElement.addEventListener("click", () => {
-      modalElement.classList.remove("modal_opened");
-    });
-  });
- 
-  modalWrapperList.forEach((modalWrapperElement) => {
-    modalWrapperElement.addEventListener("click", stopBubble);
-  });
-
-
-
-
-setClickListenersToClose();
- */
 
 /* function to handle profile edit */
 
