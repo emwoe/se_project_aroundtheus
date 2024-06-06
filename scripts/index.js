@@ -145,7 +145,7 @@ function openProfileModal() {
   modalProfile.addEventListener("mousedown", closeModalOnRemoteClick);
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
-  document.addEventListener("keydown", closeModalByEscape);
+
   const profileSaveBtn = modalProfileForm.querySelector(".modal__save-button");
   const openProfileInputList = Array.from(
     modalProfile.querySelectorAll(".modal__input")
