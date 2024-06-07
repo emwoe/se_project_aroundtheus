@@ -111,7 +111,9 @@ function deleteCard(evt) {
 
 function openModalImage(evt) {
   const imagePopOut = document.querySelector(".card__image_option_pop-out");
+  /*
   cardImagePopOut.addEventListener("mousedown", closeModalOnRemoteClick);
+  */
   imagePopOut.src = evt.target.src;
   imagePopOut.alt = evt.target.alt;
   cardImagePopOutCaption.textContent = evt.target.alt;
@@ -134,15 +136,16 @@ modalImageForm.addEventListener("submit", handleImageFormSubmit);
 
 function openPopUp(elem) {
   elem.classList.add("modal_opened");
+  elem.addEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closePopUp(elem) {
   elem.classList.remove("modal_opened");
+  elem.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function openProfileModal() {
   openPopUp(modalProfile);
-  modalProfile.addEventListener("mousedown", closeModalOnRemoteClick);
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
   modalName.classList.remove("modal__input_type_error");
@@ -164,34 +167,24 @@ function openProfileModal() {
 function openImageModal() {
   openPopUp(modalImage);
   document.addEventListener("keydown", closeModalByEscape);
-  modalImage.addEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closeProfileModal(evt) {
   closePopUp(modalProfile);
   document.removeEventListener("keydown", closeModalByEscape);
-  modalProfile.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closeImageModal(evt) {
   closePopUp(modalImage);
   document.removeEventListener("keydown", closeModalByEscape);
-  modalImage.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function closeImagePopOut(evt) {
   closePopUp(cardImagePopOut);
   document.removeEventListener("keydown", closeModalByEscape);
-  cardImagePopOut.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 /* Allow users to click anywhere outside of modal or press ESC to close modal */
-
-/*
-function stopBubble(evt) {
-  evt.stopPropagation();
-}
-*/
 
 function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
