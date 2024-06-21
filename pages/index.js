@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 const cardArea = document.querySelector(".elements");
 const initialCards = [
   {
@@ -29,9 +30,27 @@ const initialCards = [
 ];
 
 initialCards.forEach((item) => {
-  const card = new Card(item, "#localeCard");
+  const card = new Card(item, "#localeCard", openModalImage);
   const newCard = card.generateCard();
   cardArea.prepend(newCard);
+});
+
+/* enable Validation */
+
+const validationConfig = {
+  formSelector: ".form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__button_inactive",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__input-error_active",
+  errorMessageSelectorSuffix: "-input-error",
+};
+
+const formList = Array.from(document.querySelectorAll(".form"));
+formList.forEach((form) => {
+  const formToValidate = new FormValidator(validationConfig, form);
+  formToValidate.enableValidation();
 });
 
 /* consts to define DOM elements */
@@ -42,6 +61,7 @@ const modalProfile = document.querySelector(".modal_type_profile");
 const modalProfileEditBtn = document.querySelector(".info__button");
 const modalProfileCloseBtn = modalProfile.querySelector(".modal__close-button");
 const modalProfileForm = modalProfile.querySelector(".modal__container");
+const modalProfileSaveBtn = modalProfile.querySelector(".modal__save-button");
 
 const modalImage = document.querySelector(".modal_type_new-image");
 const modalImageEditBtn = document.querySelector(".profile__button");
@@ -66,67 +86,29 @@ const cardImagePopOutCloseBtn = document.querySelector(
 );
 const cardImagePopOutCaption = document.querySelector(".card__pop-out_caption");
 
-/* functions to create cards */
-
-/*
-function createCardElement(data) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImageLink = data.link;
-  const cardName = data.name;
-  const templateName = cardElement.querySelector(".card__name");
-  const templateImg = cardElement.querySelector(".card__image");
-  const templateHeart = cardElement.querySelector(".card__heart");
-  const templateDltBtn = cardElement.querySelector(".card__delete-btn");
-  templateName.textContent = cardName;
-  templateImg.src = cardImageLink;
-  templateImg.alt = cardName;
-  templateImg.addEventListener("click", openModalImage);
-  templateHeart.addEventListener("click", handleCardHeart);
-  templateDltBtn.addEventListener("click", deleteCard);
-  return cardElement;
-}
-
-initialCards.forEach(function (data) {
-  const cardElement = createCardElement(data);
-  cardArea.prepend(cardElement);
-});
-
-*/
-
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
   const newData = {};
   newData.name = modalImageTitle.value;
   newData.link = modalImageLink.value;
-  const newCard = createCardElement(newData);
-  cardArea.prepend(newCard);
-  console.log(modalImageForm);
-  console.log(newData);
+
+  const cardfromNewData = new Card(newData, "#localeCard", openModalImage);
+  const addedCard = cardfromNewData.generateCard();
+  cardArea.prepend(addedCard);
   modalImageForm.reset();
   closePopUp(modalImage);
   const imgFormSubmitBtn = modalImageForm.querySelector(".modal__save-button");
   const resetInputList = Array.from(
     modalImageForm.querySelectorAll(".modal__input")
   );
-  toggleButtonState(resetInputList, imgFormSubmitBtn);
+  imgFormSubmitBtn.classList.add("modal__button_inactive");
 }
-/* functions for card event listeners */
-
-/*
-function handleCardHeart(evt) {
-  evt.target.classList.toggle("card__heart-option-liked");
-}
-
-function deleteCard(evt) {
-  evt.target.closest(".card").remove();
-}
-*/
 
 function openModalImage(evt) {
   const imagePopOut = document.querySelector(".card__image_option_pop-out");
-  imagePopOut.src = evt.target.src;
-  imagePopOut.alt = evt.target.alt;
-  cardImagePopOutCaption.textContent = evt.target.alt;
+  imagePopOut.src = evt._data.link;
+  imagePopOut.alt = evt._data.name;
+  cardImagePopOutCaption.textContent = evt._data.name;
   openPopUp(cardImagePopOut);
 }
 
@@ -158,8 +140,11 @@ function closePopUp(elem) {
 
 function openProfileModal() {
   openPopUp(modalProfile);
+  modalProfileSaveBtn.classList.add("modal__button_inactive");
+  /*
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
+  */
   modalName.classList.remove("modal__input_type_error");
   modalJob.classList.remove("modal__input_type_error");
   const errorSpanList = Array.from(
@@ -168,12 +153,6 @@ function openProfileModal() {
   errorSpanList.forEach((errorSpan) => {
     errorSpan.textContent = "";
   });
-
-  const profileSaveBtn = modalProfileForm.querySelector(".modal__save-button");
-  const openProfileInputList = Array.from(
-    modalProfile.querySelectorAll(".modal__input")
-  );
-  toggleButtonState(openProfileInputList, profileSaveBtn);
 }
 
 function openImageModal() {
@@ -215,4 +194,5 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = modalName.value;
   profileJob.textContent = modalJob.value;
   closePopUp(modalProfile);
+  modalProfileSaveBtn.classList.add("modal__button_inactive");
 }
