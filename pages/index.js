@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+const cardArea = document.querySelector(".elements");
 const initialCards = [
   {
     name: "Austin",
@@ -25,9 +27,15 @@ const initialCards = [
     link: "images/card-images/Atlanta.jpg",
   },
 ];
+
+initialCards.forEach((item) => {
+  const card = new Card(item, "#localeCard");
+  const newCard = card.generateCard();
+  cardArea.prepend(newCard);
+});
+
 /* consts to define DOM elements */
 
-const cardArea = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#localeCard").content;
 
 const modalProfile = document.querySelector(".modal_type_profile");
@@ -60,6 +68,7 @@ const cardImagePopOutCaption = document.querySelector(".card__pop-out_caption");
 
 /* functions to create cards */
 
+/*
 function createCardElement(data) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImageLink = data.link;
@@ -82,6 +91,8 @@ initialCards.forEach(function (data) {
   cardArea.prepend(cardElement);
 });
 
+*/
+
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
   const newData = {};
@@ -101,6 +112,7 @@ function handleImageFormSubmit(evt) {
 }
 /* functions for card event listeners */
 
+/*
 function handleCardHeart(evt) {
   evt.target.classList.toggle("card__heart-option-liked");
 }
@@ -108,6 +120,7 @@ function handleCardHeart(evt) {
 function deleteCard(evt) {
   evt.target.closest(".card").remove();
 }
+*/
 
 function openModalImage(evt) {
   const imagePopOut = document.querySelector(".card__image_option_pop-out");
