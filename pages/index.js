@@ -82,10 +82,11 @@ const validationConfig = {
   errorMessageSelectorSuffix: "-input-error",
 };
 
-formList.forEach((form) => {
-  const formToValidate = new FormValidator(validationConfig, form);
-  formToValidate.enableValidation();
-});
+const profileValidator = new FormValidator(validationConfig, modalProfileForm);
+const newImageValidator = new FormValidator(validationConfig, modalImageForm);
+
+profileValidator.enableValidation();
+newImageValidator.enableValidation();
 
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
@@ -95,13 +96,14 @@ function handleImageFormSubmit(evt) {
   const addedCard = createCard(newData);
   cardArea.prepend(addedCard);
   modalImageForm.reset();
+  newImageValidator.resetValidation();
   closePopUp(modalImage);
 }
 
-function openModalImage(evt) {
-  imagePopOut.src = evt.data.link;
-  imagePopOut.alt = evt.data.name;
-  cardImagePopOutCaption.textContent = evt.data.name;
+function openModalImage(card) {
+  imagePopOut.src = card.data.link;
+  imagePopOut.alt = card.data.name;
+  cardImagePopOutCaption.textContent = card.data.name;
   openPopUp(cardImagePopOut);
 }
 
@@ -136,14 +138,10 @@ function openProfileModal() {
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
   openPopUp(modalProfile);
-  const newlyOpenedForm = new FormValidator(validationConfig, modalProfile);
-  newlyOpenedForm.resetValidation();
 }
 
 function openImageModal() {
   openPopUp(modalImage);
-  const newlyOpenedForm = new FormValidator(validationConfig, modalImage);
-  newlyOpenedForm.resetValidation();
 }
 
 /* Allow users to click anywhere outside of modal or press ESC to close modal */
@@ -170,4 +168,5 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = modalName.value;
   profileJob.textContent = modalJob.value;
   closePopUp(modalProfile);
+  profileValidator.resetValidation();
 }

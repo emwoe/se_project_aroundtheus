@@ -2,12 +2,15 @@ export default class FormValidator {
   constructor(validationConfig, form) {
     this._validationConfig = validationConfig;
     this._form = form;
-  }
-
-  toggleButtonState() {
+    this._inputList = Array.from(
+      this._form.querySelectorAll(this._validationConfig.inputSelector)
+    );
     this._buttonElement = this._form.querySelector(
       this._validationConfig.submitButtonSelector
     );
+  }
+
+  toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(
         this._validationConfig.inactiveButtonClass
@@ -22,9 +25,6 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputList = Array.from(
-      this._form.querySelectorAll(this._validationConfig.inputSelector)
-    );
     this._buttonElement = this._form.querySelector(
       this._validationConfig.submitButtonSelector
     );
@@ -40,10 +40,6 @@ export default class FormValidator {
   }
 
   _hasInvalidInput() {
-    this._inputList = Array.from(
-      this._form.querySelectorAll(this._validationConfig.inputSelector)
-    );
-    console.log(this._inputList);
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
@@ -82,12 +78,6 @@ export default class FormValidator {
   }
 
   resetValidation() {
-    this._buttonElement = this._form.querySelector(
-      this._validationConfig.submitButtonSelector
-    );
-    this._inputList = Array.from(
-      this._form.querySelectorAll(this._validationConfig.inputSelector)
-    );
     this._buttonElement.classList.add(
       this._validationConfig.inactiveButtonClass
     );
