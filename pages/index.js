@@ -87,6 +87,7 @@ const newImageValidator = new FormValidator(validationConfig, modalImageForm);
 
 profileValidator.enableValidation();
 newImageValidator.enableValidation();
+newImageValidator.resetValidation();
 
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
