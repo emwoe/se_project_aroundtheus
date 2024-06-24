@@ -85,8 +85,8 @@ const validationConfig = {
 const profileValidator = new FormValidator(validationConfig, modalProfileForm);
 const newImageValidator = new FormValidator(validationConfig, modalImageForm);
 
+profileValidator.enableValidation();
 newImageValidator.enableValidation();
-newImageValidator.resetValidation();
 
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
@@ -137,7 +137,7 @@ function closePopUp(elem) {
 function openProfileModal() {
   modalName.value = profileName.textContent;
   modalJob.value = profileJob.textContent;
-  profileValidator.enableValidation();
+  profileValidator.resetValidation();
   openPopUp(modalProfile);
 }
 
