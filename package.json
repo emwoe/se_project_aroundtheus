@@ -1,0 +1,14 @@
+{
+  "name": "se_project_aroundtheus",
+  "version": "0.0.1",
+  "description": "travel website landing page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emma Woelk",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "4.10.0"
+  }
+}

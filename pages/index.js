@@ -1,5 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+
 const cardArea = document.querySelector(".elements");
 const initialCards = [
   {
@@ -65,10 +67,19 @@ function createCard(item) {
   return card.generateCard();
 }
 
+const firstCards = new Section(
+  { items: initialCards, renderer: createCard },
+  ".elements"
+);
+firstCards.renderItems();
+
+/*
 initialCards.forEach((item) => {
   const newCard = createCard(item);
   cardArea.prepend(newCard);
 });
+
+*/
 
 /* enable Validation */
 
