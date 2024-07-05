@@ -1,8 +1,12 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
+/*
 const cardArea = document.querySelector(".elements");
+*/
+
 const initialCards = [
   {
     name: "Austin",
@@ -73,6 +77,25 @@ const firstCards = new Section(
 );
 firstCards.renderItems();
 
+const profileModal = new PopupWithForm(
+  { popupSelector: ".modal_type_profile" },
+  () => {}
+);
+const newImageModal = new PopupWithForm(
+  { popupSelector: ".modal_type_new-image" },
+  () => {}
+);
+
+modalProfileEditBtn.addEventListener("click", () => {
+  profileModal.open();
+});
+modalImageEditBtn.addEventListener("click", () => {
+  newImageModal.open();
+});
+
+profileModal.setEventListeners();
+newImageModal.setEventListeners();
+
 /*
 initialCards.forEach((item) => {
   const newCard = createCard(item);
@@ -99,17 +122,22 @@ const newImageValidator = new FormValidator(validationConfig, modalImageForm);
 profileValidator.enableValidation();
 newImageValidator.enableValidation();
 
+/*
+
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
   const newData = {};
   newData.name = modalImageTitle.value;
   newData.link = modalImageLink.value;
   const addedCard = createCard(newData);
+  firstCards.addItem(addedCard);
   cardArea.prepend(addedCard);
   modalImageForm.reset();
   newImageValidator.resetValidation();
   closePopUp(modalImage);
 }
+
+*/
 
 function openModalImage(card) {
   imagePopOut.src = card.data.link;
@@ -120,24 +148,30 @@ function openModalImage(card) {
 
 /* create other event listeners */
 
+/*
 const closeBtns = document.querySelectorAll(".modal__close-button");
 closeBtns.forEach((btn) => {
   const popup = btn.closest(".modal");
   btn.addEventListener("click", () => closePopUp(popup));
 });
+*/
 
+/*
 modalProfileEditBtn.addEventListener("click", openProfileModal);
 modalProfileForm.addEventListener("submit", handleProfileFormSubmit);
+
 modalImageEditBtn.addEventListener("click", openImageModal);
 modalImageForm.addEventListener("submit", handleImageFormSubmit);
-
+*/
 /* functions to open and close pop-ups */
 
+/*
 function openPopUp(elem) {
   elem.classList.add("modal_opened");
   elem.addEventListener("mousedown", closeModalOnRemoteClick);
   document.addEventListener("keydown", closeModalByEscape);
 }
+
 
 function closePopUp(elem) {
   elem.classList.remove("modal_opened");
@@ -155,9 +189,11 @@ function openProfileModal() {
 function openImageModal() {
   openPopUp(modalImage);
 }
+*/
 
 /* Allow users to click anywhere outside of modal or press ESC to close modal */
 
+/*
 function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
@@ -168,9 +204,9 @@ function closeModalByEscape(evt) {
 function closeModalOnRemoteClick(evt) {
   if (evt.target === evt.currentTarget) {
     closePopUp(evt.currentTarget);
-    console.log("15");
   }
 }
+*/
 
 /* function to handle profile edit */
 
