@@ -6,6 +6,10 @@ export default class Popup {
     );
   }
 
+  open() {
+    this._popupModal.classList.add("modal_opened");
+  }
+
   close() {
     this._popupModal.classList.remove("modal_opened");
   }

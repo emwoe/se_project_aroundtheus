@@ -1,42 +1,58 @@
+import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 
-/*
-const cardArea = document.querySelector(".elements");
-*/
+const AustinImage = new URL(
+  "../images/card-images/Austin.jpg",
+  import.meta.url
+);
+const NYCImage = new URL("../images/card-images/NewYork.jpg", import.meta.url);
+const SanFranImage = new URL(
+  "../images/card-images/SanFran.jpg",
+  import.meta.url
+);
+const KCityImage = new URL(
+  "../images/card-images/KansasCity.jpg",
+  import.meta.url
+);
+const ChicagoImage = new URL(
+  "../images/card-images/Chicago.jpg",
+  import.meta.url
+);
+const ATLImage = new URL("../images/card-images/Atlanta.jpg", import.meta.url);
 
 const initialCards = [
   {
     name: "Austin",
-    link: "images/card-images/Austin.jpg",
+    link: AustinImage,
   },
   {
     name: "New York",
-    link: "images/card-images/NewYork.jpg",
+    link: NYCImage,
   },
   {
     name: "San Francisco",
-    link: "images/card-images/SanFran.jpg",
+    link: SanFranImage,
   },
 
   {
     name: "Kansas City",
-    link: "images/card-images/KansasCity.jpg",
+    link: KCityImage,
   },
   {
     name: "Chicago",
-    link: "images/card-images/Chicago.jpg",
+    link: ChicagoImage,
   },
   {
     name: "Atlanta",
-    link: "images/card-images/Atlanta.jpg",
+    link: ATLImage,
   },
 ];
 
-const imagePopOut = document.querySelector(".card__image_option_pop-out");
 const formList = Array.from(document.querySelectorAll(".form"));
 const modalProfile = document.querySelector(".modal_type_profile");
 const modalProfileEditBtn = document.querySelector(".info__button");
@@ -58,7 +74,7 @@ const modalImageTitle = document.querySelector("#title");
 const modalImageLink = document.querySelector("#image-link");
 
 const cardImages = document.querySelectorAll(".card__image");
-const cardImagePopOut = document.querySelector(".modal_type_image-pop-out");
+
 const cardImagePopOutWrapper = document.querySelector(
   ".modal__wrapper_type_image-pop-out"
 );
@@ -87,12 +103,6 @@ const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
   handleFormSubmit: (evt) => {
     evt.preventDefault();
-    /*
-    const newUserInfo = new UserInfo({
-      userNameSelector: ".info__name",
-      userJobSelector: ".info__job-title",
-    });
-    */
     newUserInfo.setUserInfo();
     profileModal.close();
   },
@@ -112,6 +122,16 @@ const newImageModal = new PopupWithForm({
   },
 });
 
+function openModalImage(card) {
+  console.log(card.data.link);
+  const cardPopOut = new PopupWithImage({
+    popupSelector: ".modal_type_image-pop-out",
+    imageSelector: ".card__image_option_pop-out",
+  });
+  cardPopOut.setEventListeners();
+  cardPopOut.open(card.data.name, card.data.link);
+}
+
 modalProfileEditBtn.addEventListener("click", () => {
   profileModal.open();
   const data = newUserInfo.getUserInfo();
@@ -119,13 +139,8 @@ modalProfileEditBtn.addEventListener("click", () => {
   modalName.value = data.name;
   modalJob.value = data.job;
   profileValidator.resetValidation();
-
-  /*
-  modalName.value = profileName.textContent;
-  modalJob.value = profileJob.textContent;
-  profileValidator.resetValidation();
-  */
 });
+
 modalImageEditBtn.addEventListener("click", () => {
   newImageValidator.resetValidation();
   newImageModal.open();
@@ -133,14 +148,6 @@ modalImageEditBtn.addEventListener("click", () => {
 
 profileModal.setEventListeners();
 newImageModal.setEventListeners();
-
-/*
-initialCards.forEach((item) => {
-  const newCard = createCard(item);
-  cardArea.prepend(newCard);
-});
-
-*/
 
 /* enable Validation */
 
@@ -159,91 +166,3 @@ const newImageValidator = new FormValidator(validationConfig, modalImageForm);
 
 profileValidator.enableValidation();
 newImageValidator.enableValidation();
-
-/*
-
-function handleImageFormSubmit(evt) {
-  evt.preventDefault();
-  const newData = {};
-  newData.name = modalImageTitle.value;
-  newData.link = modalImageLink.value;
-  const addedCard = createCard(newData);
-  firstCards.addItem(addedCard);
-  cardArea.prepend(addedCard);
-  modalImageForm.reset();
-  newImageValidator.resetValidation();
-  closePopUp(modalImage);
-}
-
-*/
-
-function openModalImage(card) {
-  imagePopOut.src = card.data.link;
-  imagePopOut.alt = card.data.name;
-  cardImagePopOutCaption.textContent = card.data.name;
-  openPopUp(cardImagePopOut);
-}
-
-/* create other event listeners */
-
-/*
-const closeBtns = document.querySelectorAll(".modal__close-button");
-closeBtns.forEach((btn) => {
-  const popup = btn.closest(".modal");
-  btn.addEventListener("click", () => closePopUp(popup));
-});
-*/
-
-/*
-modalProfileEditBtn.addEventListener("click", openProfileModal);
-modalProfileForm.addEventListener("submit", handleProfileFormSubmit);
-
-modalImageEditBtn.addEventListener("click", openImageModal);
-modalImageForm.addEventListener("submit", handleImageFormSubmit);
-*/
-/* functions to open and close pop-ups */
-
-/*
-function openPopUp(elem) {
-  elem.classList.add("modal_opened");
-  elem.addEventListener("mousedown", closeModalOnRemoteClick);
-  document.addEventListener("keydown", closeModalByEscape);
-}
-
-
-function closePopUp(elem) {
-  elem.classList.remove("modal_opened");
-  elem.removeEventListener("mousedown", closeModalOnRemoteClick);
-  document.removeEventListener("keydown", closeModalByEscape);
-}
-
-function openProfileModal() {
-  modalName.value = profileName.textContent;
-  modalJob.value = profileJob.textContent;
-  profileValidator.resetValidation();
-  openPopUp(modalProfile);
-}
-
-function openImageModal() {
-  openPopUp(modalImage);
-}
-*/
-
-/* Allow users to click anywhere outside of modal or press ESC to close modal */
-
-/*
-function closeModalByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    closePopUp(openedModal);
-  }
-}
-
-function closeModalOnRemoteClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopUp(evt.currentTarget);
-  }
-}
-*/
-
-/* function to handle profile edit */

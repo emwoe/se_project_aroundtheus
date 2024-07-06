@@ -8,10 +8,6 @@ export default class PopupWithForm extends Popup {
     this._modalForm = this._popupModal.querySelector(".modal__container");
   }
 
-  open() {
-    this._popupModal.classList.add("modal_opened");
-  }
-
   close() {
     this._modalForm.reset();
     super.close();

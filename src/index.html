@@ -10,13 +10,12 @@
       content="This is an interactive landing page about travels across the USA"
     />
     <meta name="keywords" content="travel log, united states" />
-    <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body class="page">
     <header class="header">
       <img
         class="header__logo"
-        src="images/TitleImg.svg"
+        src="<%=require('./images/TitleImg.svg')%>"
         alt="Around the U.S."
       />
     </header>
@@ -117,6 +116,5 @@
     <footer class="footer">
       <p class="footer__copyright">© 2024 Around The U.S.</p>
     </footer>
-    <script src="pages/index.js" type="module" defer></script>
   </body>
 </html>
