@@ -18,6 +18,7 @@ export default class Popup {
 
   _handleRemoteClick(evt) {
     if (evt.target === evt.currentTarget) {
+      console.log(evt.target);
       this.close();
     }
   }
@@ -27,6 +28,9 @@ export default class Popup {
       this.close();
     });
     document.addEventListener("keydown", this._handleEscClose.bind(this));
-    document.addEventListener("click", this._handleRemoteClick.bind(this));
+    this._popupModal.addEventListener(
+      "click",
+      this._handleRemoteClick.bind(this)
+    );
   }
 }

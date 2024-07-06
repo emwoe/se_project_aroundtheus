@@ -2,6 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 /*
 const cardArea = document.querySelector(".elements");
@@ -77,19 +78,56 @@ const firstCards = new Section(
 );
 firstCards.renderItems();
 
-const profileModal = new PopupWithForm(
-  { popupSelector: ".modal_type_profile" },
-  () => {}
-);
-const newImageModal = new PopupWithForm(
-  { popupSelector: ".modal_type_new-image" },
-  () => {}
-);
+const newUserInfo = new UserInfo({
+  userNameSelector: ".info__name",
+  userJobSelector: ".info__job-title",
+});
+
+const profileModal = new PopupWithForm({
+  popupSelector: ".modal_type_profile",
+  handleFormSubmit: (evt) => {
+    evt.preventDefault();
+    /*
+    const newUserInfo = new UserInfo({
+      userNameSelector: ".info__name",
+      userJobSelector: ".info__job-title",
+    });
+    */
+    newUserInfo.setUserInfo();
+    profileModal.close();
+  },
+});
+const newImageModal = new PopupWithForm({
+  popupSelector: ".modal_type_new-image",
+  handleFormSubmit: (evt) => {
+    evt.preventDefault();
+    const newData = {};
+    newData.name = modalImageTitle.value;
+    newData.link = modalImageLink.value;
+    const addedCard = createCard(newData);
+    firstCards.addItem(addedCard);
+    modalImageForm.reset();
+    newImageValidator.resetValidation();
+    newImageModal.close();
+  },
+});
 
 modalProfileEditBtn.addEventListener("click", () => {
   profileModal.open();
+  const data = newUserInfo.getUserInfo();
+  console.log(data);
+  modalName.value = data.name;
+  modalJob.value = data.job;
+  profileValidator.resetValidation();
+
+  /*
+  modalName.value = profileName.textContent;
+  modalJob.value = profileJob.textContent;
+  profileValidator.resetValidation();
+  */
 });
 modalImageEditBtn.addEventListener("click", () => {
+  newImageValidator.resetValidation();
   newImageModal.open();
 });
 
@@ -209,11 +247,3 @@ function closeModalOnRemoteClick(evt) {
 */
 
 /* function to handle profile edit */
-
-function handleProfileFormSubmit(evt) {
-  console.log("Registered submit");
-  evt.preventDefault();
-  profileName.textContent = modalName.value;
-  profileJob.textContent = modalJob.value;
-  closePopUp(modalProfile);
-}
