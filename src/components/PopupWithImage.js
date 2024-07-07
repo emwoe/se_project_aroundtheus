@@ -3,7 +3,6 @@ import Popup from "./Popup.js";
 export default class PopupWithImage extends Popup {
   constructor({ popupSelector, imageSelector }) {
     super({ popupSelector });
-    this._popupModal = document.querySelector(popupSelector);
     this._popupModalImage = this._popupModal.querySelector(imageSelector);
     this._popupModalCaption = this._popupModal.querySelector(
       ".card__pop-out_caption"

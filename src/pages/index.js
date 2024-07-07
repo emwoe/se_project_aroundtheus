@@ -25,6 +25,11 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 
+const cardPopOut = new PopupWithImage({
+  popupSelector: ".modal_type_image-pop-out",
+  imageSelector: ".card__image_option_pop-out",
+});
+
 function createCard(item) {
   const card = new Card(item, "#localeCard", openModalImage);
   return card.generateCard();
@@ -44,9 +49,8 @@ const newUserInfo = new UserInfo({
 
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
-  handleFormSubmit: (evt) => {
-    evt.preventDefault();
-    newUserInfo.setUserInfo();
+  handleFormSubmit: () => {
+    newUserInfo.setUserInfo({ name: modalName, job: modalJob });
     profileModal.close();
   },
 });
@@ -57,17 +61,19 @@ const newImageModal = new PopupWithForm({
     const addedCard = createCard(newData);
     firstCards.addItem(addedCard);
     modalImageForm.reset();
-    newImageValidator.resetValidation();
+    newImageValidator.toggleButtonState();
     newImageModal.close();
   },
 });
 
 function openModalImage(card) {
+  /*
   console.log(card.data.link);
   const cardPopOut = new PopupWithImage({
     popupSelector: ".modal_type_image-pop-out",
     imageSelector: ".card__image_option_pop-out",
   });
+  */
   cardPopOut.setEventListeners();
   cardPopOut.open(card.data.name, card.data.link);
 }
@@ -82,7 +88,9 @@ modalProfileEditBtn.addEventListener("click", () => {
 });
 
 modalImageEditBtn.addEventListener("click", () => {
+  /*
   newImageValidator.resetValidation();
+  */
   newImageModal.open();
 });
 

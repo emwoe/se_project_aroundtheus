@@ -10,10 +10,8 @@ export default class UserInfo {
     return { name: this._userName.textContent, job: this._userJob.textContent };
   }
 
-  setUserInfo() {
-    const modalName = document.querySelector("#name");
-    const modalJob = document.querySelector("#job-description");
-    this._userName.textContent = modalName.value;
-    this._userJob.textContent = modalJob.value;
+  setUserInfo(data) {
+    this._userName.textContent = data.name.value;
+    this._userJob.textContent = data.job.value;
   }
 }

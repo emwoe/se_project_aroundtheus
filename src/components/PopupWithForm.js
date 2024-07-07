@@ -4,15 +4,9 @@ import { modalImageTitle, modalImageLink } from "../utils/constants.js";
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super({ popupSelector });
-    this._popupModal = document.querySelector(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._modalForm = this._popupModal.querySelector(".modal__container");
     this._modalInputs = this._popupModal.querySelectorAll(".modal__input");
-  }
-
-  close() {
-    this._modalForm.reset();
-    super.close();
   }
 
   _getInputValues() {
