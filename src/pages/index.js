@@ -30,6 +30,8 @@ const cardPopOut = new PopupWithImage({
   imageSelector: ".card__image_option_pop-out",
 });
 
+cardPopOut.setEventListeners();
+
 function createCard(item) {
   const card = new Card(item, "#localeCard", openModalImage);
   return card.generateCard();
@@ -49,8 +51,10 @@ const newUserInfo = new UserInfo({
 
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
-  handleFormSubmit: () => {
-    newUserInfo.setUserInfo({ name: modalName, job: modalJob });
+  handleFormSubmit: (formData) => {
+    console.log(formData.name);
+    console.log(formData.job);
+    newUserInfo.setUserInfo({ name: formData.name, job: formData.job });
     profileModal.close();
   },
 });
@@ -67,14 +71,6 @@ const newImageModal = new PopupWithForm({
 });
 
 function openModalImage(card) {
-  /*
-  console.log(card.data.link);
-  const cardPopOut = new PopupWithImage({
-    popupSelector: ".modal_type_image-pop-out",
-    imageSelector: ".card__image_option_pop-out",
-  });
-  */
-  cardPopOut.setEventListeners();
   cardPopOut.open(card.data.name, card.data.link);
 }
 
