@@ -20,6 +20,7 @@ export default class Popup {
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
       this.close();
+      console.log("TEST REMOVE");
     }
   }
 
@@ -41,18 +42,11 @@ export default class Popup {
   }
 
   _addEscEventListener() {
-    document.addEventListener(
-      "keydown",
-      this._handleEscClose.bind(this),
-      false
-    );
+    document.addEventListener("keydown", this._handleEscClose, false);
+    console.log("Listener added!");
   }
   _removeEscEventListener() {
-    document.removeEventListener(
-      "keydown",
-      this._handleEscClose.bind(this),
-      false
-    );
-    console.log("Listener has been removed");
+    document.removeEventListener("keydown", this._handleEscClose, false);
+    console.log("Listener removed!");
   }
 }
