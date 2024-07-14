@@ -5,7 +5,7 @@ export default class Api {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
       headers: {
         authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
-        "Content-Type": "application/jason",
+        "Content-Type": "application/json",
       },
     }).then((res) => {
       if (res.ok) {
@@ -19,7 +19,7 @@ export default class Api {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards/me", {
       headers: {
         authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
-        "Content-Type": "application/jason",
+        "Content-Type": "application/json",
       },
     }).then((res) => {
       if (res.ok) {

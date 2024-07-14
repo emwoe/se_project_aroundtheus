@@ -38,6 +38,14 @@ fetch("https://around-api.en.tripleten-services.com/v1/cards", {
   }),
 });
 
+//* Questions about the following code: Ignoring the 403 errors, it seems like this should pull the placeholder
+//* information from the API, then create and render the cards from the initialCards data
+//* (which is never posted to the server??), then create newUserInfo with the information
+//* available on load --> but then would it reset the on-page user data to the PLACEHOLDER
+//* data in the new, blank API?? It looks to me like the "[card, userData]" passed
+//* in the api.loadPageResults() call is the api data requested (currently just placehold)
+//* in the getInitialCards and fetchUserInfo requests in API.js?
+
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -48,7 +56,7 @@ const api = new Api({
 let firstCards;
 let newUserInfo;
 
-api.loadPageResults().then(() => {
+api.loadPageResults().then(([card, userData]) => {
   firstCards = new Section(
     { items: initialCards, renderer: createCard },
     ".elements"
@@ -58,6 +66,7 @@ api.loadPageResults().then(() => {
     userNameSelector: ".info__name",
     userJobSelector: ".info__job-title",
   });
+  newUserInfo.setUserInfo({ name: userData.name, job: userData.job });
 });
 
 /*
