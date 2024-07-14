@@ -24,6 +24,52 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
+
+fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+  method: "POST",
+  hearders: {
+    authorization: "9a7bdd13-ee70-49fc-ae6f-a60d209f224e",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Berlin",
+    link: "https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  }),
+});
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
+    "Content-Type": "application/json",
+  },
+});
+let firstCards;
+let newUserInfo;
+
+api.loadPageResults().then(() => {
+  firstCards = new Section(
+    { items: initialCards, renderer: createCard },
+    ".elements"
+  );
+  firstCards.renderItems();
+  newUserInfo = new UserInfo({
+    userNameSelector: ".info__name",
+    userJobSelector: ".info__job-title",
+  });
+});
+
+/*
+api
+  .getInitialCards()
+  .then((result) => {
+    return new Section({ items: result, renderer: createCard }, ".elements");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+*/
 
 const cardPopOut = new PopupWithImage({
   popupSelector: ".modal_type_image-pop-out",
@@ -37,6 +83,7 @@ function createCard(item) {
   return card.generateCard();
 }
 
+/*
 const firstCards = new Section(
   { items: initialCards, renderer: createCard },
   ".elements"
@@ -44,10 +91,12 @@ const firstCards = new Section(
 
 firstCards.renderItems();
 
+
 const newUserInfo = new UserInfo({
   userNameSelector: ".info__name",
   userJobSelector: ".info__job-title",
 });
+*/
 
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
