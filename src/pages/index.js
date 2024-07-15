@@ -26,26 +26,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-  method: "POST",
-  hearders: {
-    authorization: "9a7bdd13-ee70-49fc-ae6f-a60d209f224e",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    name: "Berlin",
-    link: "https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  }),
-});
-
-//* Questions about the following code: Ignoring the 403 errors, it seems like this should pull the placeholder
-//* information from the API, then create and render the cards from the initialCards data
-//* (which is never posted to the server??), then create newUserInfo with the information
-//* available on load --> but then would it reset the on-page user data to the PLACEHOLDER
-//* data in the new, blank API?? It looks to me like the "[card, userData]" passed
-//* in the api.loadPageResults() call is the api data requested (currently just placehold)
-//* in the getInitialCards and fetchUserInfo requests in API.js?
-
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -53,32 +33,24 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-let firstCards;
-let newUserInfo;
+let cardArea;
 
-api.loadPageResults().then(([card, userData]) => {
-  firstCards = new Section(
-    { items: initialCards, renderer: createCard },
-    ".elements"
-  );
-  firstCards.renderItems();
-  newUserInfo = new UserInfo({
-    userNameSelector: ".info__name",
-    userJobSelector: ".info__job-title",
-  });
-  newUserInfo.setUserInfo({ name: userData.name, job: userData.job });
+const newUserInfo = new UserInfo({
+  userNameSelector: ".info__name",
+  userJobSelector: ".info__job-title",
 });
 
-/*
 api
-  .getInitialCards()
-  .then((result) => {
-    return new Section({ items: result, renderer: createCard }, ".elements");
+  .loadPageResults()
+  .then(([cards, userData]) => {
+    cardArea = new Section({ items: cards, renderer: createCard }, ".elements");
+    cardArea.renderItems();
+    console.log(userData);
+    newUserInfo.setUserInfo({ name: userData.name, job: userData.about });
   })
   .catch((err) => {
     console.error(err);
   });
-*/
 
 const cardPopOut = new PopupWithImage({
   popupSelector: ".modal_type_image-pop-out",
@@ -110,9 +82,14 @@ const newUserInfo = new UserInfo({
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
   handleFormSubmit: (formData) => {
-    console.log(formData.name);
-    console.log(formData.job);
-    newUserInfo.setUserInfo({ name: formData.name, job: formData.job });
+    api
+      .editUserInfo(formData)
+      .then((userData) => {
+        newUserInfo.setUserInfo({ name: userData.name, job: userData.about });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     profileModal.close();
   },
 });
@@ -120,8 +97,19 @@ const profileModal = new PopupWithForm({
 const newImageModal = new PopupWithForm({
   popupSelector: ".modal_type_new-image",
   handleFormSubmit: (newData) => {
+    api
+      .addNewCard(newData)
+      .then((cardData) => {
+        return createCard(cardData);
+      })
+      .then((addedCard) => cardArea.addItem(addedCard))
+      .catch((err) => {
+        console.error(err);
+      });
+    /*
     const addedCard = createCard(newData);
-    firstCards.addItem(addedCard);
+    cardArea.addItem(addedCard);
+    */
     modalImageForm.reset();
     newImageValidator.toggleButtonState();
     newImageModal.close();
