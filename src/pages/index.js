@@ -25,10 +25,14 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupWithDelete from "../components/PopupDelete";
+
+let cardToDelete;
+let readyToDelete;
 
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
+  apiAddress: "https://around-api.en.tripleten-services.com/v1",
+  apiHeaders: {
     authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
     "Content-Type": "application/json",
   },
@@ -59,8 +63,17 @@ const cardPopOut = new PopupWithImage({
 
 cardPopOut.setEventListeners();
 
+const deleteCardModal = new PopupWithDelete({
+  popupSelector: ".modal_type_delete-image",
+  handleBtnClick: () => {
+    console.log(cardToDelete.data._id);
+    api.deleteCard(cardToDelete.data._id).then(cardToDelete.deleteCard());
+    deleteCardModal.close();
+  },
+});
+
 function createCard(item) {
-  const card = new Card(item, "#localeCard", openModalImage);
+  const card = new Card(item, "#localeCard", openModalImage, handleDelete);
   return card.generateCard();
 }
 
@@ -106,10 +119,6 @@ const newImageModal = new PopupWithForm({
       .catch((err) => {
         console.error(err);
       });
-    /*
-    const addedCard = createCard(newData);
-    cardArea.addItem(addedCard);
-    */
     modalImageForm.reset();
     newImageValidator.toggleButtonState();
     newImageModal.close();
@@ -118,6 +127,18 @@ const newImageModal = new PopupWithForm({
 
 function openModalImage(card) {
   cardPopOut.open(card.data.name, card.data.link);
+}
+
+function handleDelete(card) {
+  deleteCardModal.open();
+  deleteCardModal.setEventListeners();
+  cardToDelete = card;
+  /*
+  if (readyToDelete) {
+    card.deleteCard();
+    readyToDelete = false;
+  }
+  */
 }
 
 modalProfileEditBtn.addEventListener("click", () => {
@@ -130,9 +151,6 @@ modalProfileEditBtn.addEventListener("click", () => {
 });
 
 modalImageEditBtn.addEventListener("click", () => {
-  /*
-  newImageValidator.resetValidation();
-  */
   newImageModal.open();
 });
 

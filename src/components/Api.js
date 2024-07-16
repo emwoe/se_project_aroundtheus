@@ -1,69 +1,59 @@
 export default class Api {
-  constructor() {}
+  constructor({ apiAddress, apiHeaders }) {
+    this._apiAddress = apiAddress;
+    this._apiHeaders = apiHeaders;
+  }
+
+  _serverRequest(url, options) {
+    return fetch(url, options).then(this.renderResult);
+  }
+
+  renderResult(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+  }
 
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-      headers: {
-        authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+    return this._serverRequest(`${this._apiAddress}/cards`, {
+      headers: this._apiHeaders,
     });
   }
 
   fetchUserInfo() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
-      headers: {
-        authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+    return this._serverRequest(`${this._apiAddress}/users/me`, {
+      headers: this._apiHeaders,
     });
   }
 
   editUserInfo(newUserInput) {
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+    return this._serverRequest(`${this._apiAddress}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
-        "Content-Type": "application/json",
-      },
+      headers: this._apiHeaders,
       body: JSON.stringify({
         name: newUserInput.name,
         about: newUserInput.job,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
   addNewCard(newCardInput) {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+    return this._serverRequest(`${this._apiAddress}/cards`, {
       method: "POST",
-      headers: {
-        authorization: "34ba410c-a4f9-4189-8d1e-4545749c88e4",
-        "Content-Type": "application/json",
-      },
+      headers: this._apiHeaders,
       body: JSON.stringify({
         name: newCardInput.name,
         link: newCardInput.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  deleteCard(cardId) {
+    return this._serverRequest(`${this._apiAddress}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._apiHeaders,
     });
   }
 

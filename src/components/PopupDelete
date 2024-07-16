@@ -1,0 +1,18 @@
+import Popup from "./Popup.js";
+
+export default class PopupWithDelete extends Popup {
+  constructor({ popupSelector, handleBtnClick }) {
+    super({ popupSelector });
+    this._handleBtnClick = handleBtnClick;
+    this._popupModal = document.querySelector(popupSelector);
+    this._modalButton = this._popupModal.querySelector(".modal__save-button");
+  }
+
+  setEventListeners() {
+    this._modalButton.addEventListener("click", (evt) => {
+      evt.preventDefault();
+      this._handleBtnClick();
+    });
+    super.setEventListeners();
+  }
+}

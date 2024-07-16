@@ -64,6 +64,10 @@
   line-height: 29px;
 }
 
+.modal__title_type-delete {
+  margin-bottom: 3px;
+}
+
 .modal__input {
   width: 83.25%;
   margin: 0 auto 0;
@@ -137,6 +141,10 @@
     font-size: 18px;
     line-height: 21.78px;
     margin-bottom: 76px;
+  }
+
+  .modal__title_type-delete {
+    margin-bottom: 3px;
   }
 
   .modal__input {
