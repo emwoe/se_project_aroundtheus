@@ -57,6 +57,20 @@ export default class Api {
     });
   }
 
+  addLike(cardId) {
+    return this._serverRequest(`${this._apiAddress}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._apiHeaders,
+    });
+  }
+
+  removeLike(cardId) {
+    return this._serverRequest(`${this._apiAddress}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._apiHeaders,
+    });
+  }
+
   loadPageResults() {
     return Promise.all([this.getInitialCards(), this.fetchUserInfo()]);
   }

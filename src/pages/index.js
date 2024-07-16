@@ -29,6 +29,10 @@ import PopupWithDelete from "../components/PopupDelete";
 
 let cardToDelete;
 let readyToDelete;
+let cardArea;
+let likedCard;
+
+//Get initial cards and user info from server
 
 const api = new Api({
   apiAddress: "https://around-api.en.tripleten-services.com/v1",
@@ -37,7 +41,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-let cardArea;
 
 const newUserInfo = new UserInfo({
   userNameSelector: ".info__name",
@@ -56,6 +59,19 @@ api
     console.error(err);
   });
 
+//Create cards and handle their buttons
+
+function createCard(item) {
+  const card = new Card(
+    item,
+    "#localeCard",
+    openModalImage,
+    handleDelete,
+    handleLike
+  );
+  return card.generateCard();
+}
+
 const cardPopOut = new PopupWithImage({
   popupSelector: ".modal_type_image-pop-out",
   imageSelector: ".card__image_option_pop-out",
@@ -72,25 +88,39 @@ const deleteCardModal = new PopupWithDelete({
   },
 });
 
-function createCard(item) {
-  const card = new Card(item, "#localeCard", openModalImage, handleDelete);
-  return card.generateCard();
+function handleDelete(card) {
+  deleteCardModal.open();
+  deleteCardModal.setEventListeners();
+  cardToDelete = card;
 }
 
-/*
-const firstCards = new Section(
-  { items: initialCards, renderer: createCard },
-  ".elements"
-);
+//Question: why can't I pass 'card' as a param in handleLike below (as I did in handleDelete above?)
 
-firstCards.renderItems();
+function handleLike() {
+  likedCard = this;
+  if (likedCard.data.isLiked == false) {
+    likedCard.data.isLiked = true;
+    api.addLike(likedCard.data._id);
+  } else {
+    likedCard.data.isLiked = false;
+    api.removeLike(likedCard.data._id);
+  }
+}
 
+//Handle edit/add button clicks
 
-const newUserInfo = new UserInfo({
-  userNameSelector: ".info__name",
-  userJobSelector: ".info__job-title",
+modalProfileEditBtn.addEventListener("click", () => {
+  profileModal.open();
+  const data = newUserInfo.getUserInfo();
+  console.log(data);
+  modalName.value = data.name;
+  modalJob.value = data.job;
+  profileValidator.resetValidation();
 });
-*/
+
+modalImageEditBtn.addEventListener("click", () => {
+  newImageModal.open();
+});
 
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
@@ -125,37 +155,12 @@ const newImageModal = new PopupWithForm({
   },
 });
 
+profileModal.setEventListeners();
+newImageModal.setEventListeners();
+
 function openModalImage(card) {
   cardPopOut.open(card.data.name, card.data.link);
 }
-
-function handleDelete(card) {
-  deleteCardModal.open();
-  deleteCardModal.setEventListeners();
-  cardToDelete = card;
-  /*
-  if (readyToDelete) {
-    card.deleteCard();
-    readyToDelete = false;
-  }
-  */
-}
-
-modalProfileEditBtn.addEventListener("click", () => {
-  profileModal.open();
-  const data = newUserInfo.getUserInfo();
-  console.log(data);
-  modalName.value = data.name;
-  modalJob.value = data.job;
-  profileValidator.resetValidation();
-});
-
-modalImageEditBtn.addEventListener("click", () => {
-  newImageModal.open();
-});
-
-profileModal.setEventListeners();
-newImageModal.setEventListeners();
 
 /* enable Validation */
 

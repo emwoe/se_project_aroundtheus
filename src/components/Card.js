@@ -1,9 +1,16 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageClick, handleDeleteBtn) {
+  constructor(
+    data,
+    cardSelector,
+    handleImageClick,
+    handleDeleteBtn,
+    handleLikeBtn
+  ) {
     this._cardSelector = cardSelector;
     this.data = data;
     this._handleImageClick = handleImageClick;
     this._handleDeleteBtn = handleDeleteBtn;
+    this._handleLikeBtn = handleLikeBtn;
   }
   _getTemplate() {
     this._cardTemplate = document
@@ -27,12 +34,10 @@ export default class Card {
     const cardHeart = this._cardElement.querySelector(".card__heart");
     const cardDeleteBtn = this._cardElement.querySelector(".card__delete-btn");
     cardHeart.addEventListener("click", () => {
+      cardHeart.classList.toggle("card__heart-option-liked");
       this._handleLikeBtn();
     });
     cardDeleteBtn.addEventListener("click", () => {
-      /*
-      this._handleDeleteBtn();
-      */
       this._handleDeleteBtn(this);
     });
     const cardImageElement = this._cardElement.querySelector(".card__image");
@@ -46,9 +51,11 @@ export default class Card {
     this._cardElement = null;
   }
 
+  /*
   _handleLikeBtn() {
     this._cardElement
       .querySelector(".card__heart")
       .classList.toggle("card__heart-option-liked");
   }
+  */
 }
