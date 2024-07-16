@@ -61,7 +61,9 @@ export default class Api {
     return this._serverRequest(`${this._apiAddress}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._apiHeaders,
+      /*
       body: JSON.stringify({ isLiked: true }),
+      */
     });
   }
 
@@ -69,47 +71,15 @@ export default class Api {
     return this._serverRequest(`${this._apiAddress}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._apiHeaders,
+      /*
       body: JSON.stringify({ isLiked: false }),
+      */
     });
   }
 
-  checkCardStatus(cardId) {
+  checkCardsStatus() {
     return this._serverRequest(`${this._apiAddress}/cards`, {
       headers: this._apiHeaders,
-    });
-  }
-
-  /*
-  saveLikedStatus(cardId) {
-    return this._serverRequest(`${this._apiAddress}/cards/${cardId}`, {
-      method: "PATCH",
-      headers: this._apiHeaders,
-      body: JSON.stringify({ isLiked: true }),
-    });
-  }
- 
-
-  saveLikedStatus(cardId) {
-    const url = `${this._apiAddress}/cards/${cardId}`;
-    console.log("Making PATCH request to URL:", url); // Output the full URL to console
-    return this._serverRequest(url, {
-      method: "PATCH",
-      headers: {
-        ...this._apiHeaders,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isLiked: true }),
-    }).catch((error) => {
-      console.error("Error updating card like status:", error);
-    });
-  }
-  */
-
-  saveUnlikedStatus(cardId) {
-    return this._serverRequest(`${this._apiAddress}/cards/${cardId}`, {
-      method: "PATCH",
-      headers: this._apiHeaders,
-      body: JSON.stringify({ isLiked: false }),
     });
   }
 

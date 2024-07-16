@@ -99,26 +99,13 @@ function handleDelete(card) {
 function handleLike() {
   if (this.data.isLiked == false) {
     api.addLike(this.data._id);
-  } else {
-    api.removeLike(this.data._id);
-  }
-
-  /*
-  if (this.data.isLiked == false) {
     this.data.isLiked = true;
-    console.log(this);
-    api.addLike(this.data._id);
-    api.checkCardStatus(this.data._id);
+    api.checkCardsStatus();
   } else {
-    this.data.isLiked = false;
-    console.log(this);
     api.removeLike(this.data._id);
-    api.checkCardStatus(this.data._id);
-    /*
-    api.saveUnlikedStatus(this.data._id);
-  
+    this.data.isLiked = false;
+    api.checkCardsStatus();
   }
-  */
 }
 
 //Handle edit/add button clicks
