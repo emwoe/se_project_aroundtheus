@@ -97,14 +97,28 @@ function handleDelete(card) {
 //Question: why can't I pass 'card' as a param in handleLike below (as I did in handleDelete above?)
 
 function handleLike() {
-  likedCard = this;
-  if (likedCard.data.isLiked == false) {
-    likedCard.data.isLiked = true;
-    api.addLike(likedCard.data._id);
+  if (this.data.isLiked == false) {
+    api.addLike(this.data._id);
   } else {
-    likedCard.data.isLiked = false;
-    api.removeLike(likedCard.data._id);
+    api.removeLike(this.data._id);
   }
+
+  /*
+  if (this.data.isLiked == false) {
+    this.data.isLiked = true;
+    console.log(this);
+    api.addLike(this.data._id);
+    api.checkCardStatus(this.data._id);
+  } else {
+    this.data.isLiked = false;
+    console.log(this);
+    api.removeLike(this.data._id);
+    api.checkCardStatus(this.data._id);
+    /*
+    api.saveUnlikedStatus(this.data._id);
+  
+  }
+  */
 }
 
 //Handle edit/add button clicks
