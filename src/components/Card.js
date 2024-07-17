@@ -20,11 +20,6 @@ export default class Card {
     return this._cardTemplate;
   }
 
-  /*
-  const cardHeart = this._cardElement.querySelector(".card__heart");
-    const cardDeleteBtn = this._cardElement.querySelector(".card__delete-btn");
-    */
-
   generateCard() {
     this._cardElement = this._getTemplate();
     this._cardHeart = this._cardElement.querySelector(".card__heart");
@@ -37,23 +32,11 @@ export default class Card {
     } else {
       this._cardHeart.classList.remove("card__heart-option-liked");
     }
-    /*
-
-    CardHeart and cardHeartBtn to be moved to consts?
-
-     something like this:
-     if (this.data.isLiked == false) {
-      cardHeart.classList.add("card__heart-option-liked");
-     }
-    */
 
     return this._cardElement;
   }
 
   _setEventListeners() {
-    /*
-    const cardHeart = this._cardElement.querySelector(".card__heart");
-    */
     const cardDeleteBtn = this._cardElement.querySelector(".card__delete-btn");
     this._cardHeart.addEventListener("click", () => {
       this._cardHeart.classList.toggle("card__heart-option-liked");
@@ -72,12 +55,4 @@ export default class Card {
     this._cardElement.remove();
     this._cardElement = null;
   }
-
-  /*
-  _handleLikeBtn() {
-    this._cardElement
-      .querySelector(".card__heart")
-      .classList.toggle("card__heart-option-liked");
-  }
-  */
 }

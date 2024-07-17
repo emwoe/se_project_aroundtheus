@@ -8,7 +8,9 @@
 }
 
 .profile__circle {
+  /*
   background-image: url(../images/Avatar.png);
+  */
   margin: 0;
   height: 120px;
   width: 120px;

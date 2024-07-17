@@ -33,11 +33,6 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    /*
-    this._buttonElement = this._form.querySelector(
-      this._validationConfig.submitButtonSelector
-    );
-    */
     this._disableButton();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {

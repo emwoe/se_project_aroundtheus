@@ -86,6 +86,11 @@ export const modalJob = document.querySelector("#job-description");
 export const newProfileImageBtn = document.querySelector(
   ".profile__sheer-hover"
 );
+export const modalNewPicture = document.querySelector(
+  ".modal_type_change-profile-picture"
+);
+export const newProfilePictureForm =
+  modalNewPicture.querySelector(".modal__container");
 
 export const modalImageTitle = document.querySelector("#title");
 export const modalImageLink = document.querySelector("#image-link");

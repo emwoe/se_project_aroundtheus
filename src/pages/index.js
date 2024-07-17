@@ -18,6 +18,8 @@ import {
   modalImageTitle,
   modalImageLink,
   newProfileImageBtn,
+  modalNewPicture,
+  newProfilePictureForm,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -46,6 +48,7 @@ const api = new Api({
 const newUserInfo = new UserInfo({
   userNameSelector: ".info__name",
   userJobSelector: ".info__job-title",
+  profilePictureSelector: ".profile__circle",
 });
 
 api
@@ -54,7 +57,11 @@ api
     cardArea = new Section({ items: cards, renderer: createCard }, ".elements");
     cardArea.renderItems();
     console.log(userData);
-    newUserInfo.setUserInfo({ name: userData.name, job: userData.about });
+    newUserInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+    });
+    newUserInfo.setUserPicture({ avatar: userData.avatar });
   })
   .catch((err) => {
     console.error(err);
@@ -98,21 +105,13 @@ function handleDelete(card) {
 //Question: why can't I pass 'card' as a param in handleLike below (as I did in handleDelete above?)
 
 function handleLike() {
-  api.checkCardsStatus();
   if (this.data.isLiked == false) {
-    console.log("about to be liked!");
     api.addLike(this.data._id);
     this.data.isLiked = true;
-    console.log(this.data.isLiked);
-    console.log(this);
   } else {
-    console.log("about to be unliked!");
     api.removeLike(this.data._id);
     this.data.isLiked = false;
-    console.log(this.data.isLiked);
-    console.log(this);
   }
-  api.checkCardsStatus();
 }
 
 //Handle edit/add button clicks
@@ -128,7 +127,6 @@ modalProfileEditBtn.addEventListener("click", () => {
 
 newProfileImageBtn.addEventListener("click", () => {
   newProfilePictureModal.open();
-  newProfilePictureModal.setEventListeners();
 });
 
 modalImageEditBtn.addEventListener("click", () => {
@@ -149,10 +147,37 @@ const profileModal = new PopupWithForm({
     profileModal.close();
   },
 });
+/*
+const newProfilePictureModal = new PopupWithForm({
+  popupSelector: ".modal_type_change-profile-picture",
+  handleFormSubmit: (data) => {
+    console.log("formLink is" + data);
+    api
+      .editUserProfilePicture(formLink)
+      .then((userData) => {
+        newUserInfo.setUserPicture({ avatar: userData.avatar });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    profileModal.close();
+  },
+});
+*/
 
 const newProfilePictureModal = new PopupWithForm({
   popupSelector: ".modal_type_change-profile-picture",
-  handleFormSubmit: (formData) => {},
+  handleFormSubmit: (formData) => {
+    api
+      .editUserProfilePicture(formData)
+      .then((userData) => {
+        newUserInfo.setUserPicture({ avatar: userData.avatar });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    newProfilePictureModal.close();
+  },
 });
 
 const newImageModal = new PopupWithForm({
@@ -175,6 +200,7 @@ const newImageModal = new PopupWithForm({
 
 profileModal.setEventListeners();
 newImageModal.setEventListeners();
+newProfilePictureModal.setEventListeners();
 
 function openModalImage(card) {
   cardPopOut.open(card.data.name, card.data.link);
@@ -184,6 +210,15 @@ function openModalImage(card) {
 
 const profileValidator = new FormValidator(validationConfig, modalProfileForm);
 const newImageValidator = new FormValidator(validationConfig, modalImageForm);
+/*
+const newProfilePictureValidator = new FormValidator(
+  validationConfig,
+  newProfilePictureForm
+);
+*/
 
 profileValidator.enableValidation();
 newImageValidator.enableValidation();
+/*
+newProfilePictureValidator.enableValidation();
+*/
