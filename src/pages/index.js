@@ -202,15 +202,11 @@ function openModalImage(card) {
 
 const profileValidator = new FormValidator(validationConfig, modalProfileForm);
 const newImageValidator = new FormValidator(validationConfig, modalImageForm);
-/*
 const newProfilePictureValidator = new FormValidator(
   validationConfig,
   newProfilePictureForm
 );
-*/
 
 profileValidator.enableValidation();
 newImageValidator.enableValidation();
-/*
 newProfilePictureValidator.enableValidation();
-*/
