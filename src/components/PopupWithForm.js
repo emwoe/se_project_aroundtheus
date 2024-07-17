@@ -2,9 +2,10 @@ import Popup from "./Popup.js";
 import { modalImageTitle, modalImageLink } from "../utils/constants.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
+  constructor({ popupSelector, handleFormSubmit, buttonText }) {
     super({ popupSelector });
     this._handleFormSubmit = handleFormSubmit;
+    this._buttonText = buttonText;
     this._modalForm = this._popupModal.querySelector(".modal__container");
     this._modalInputs = this._popupModal.querySelectorAll(".modal__input");
   }
@@ -26,5 +27,15 @@ export default class PopupWithForm extends Popup {
       this._handleFormSubmit(inputValues);
     });
     super.setEventListeners();
+  }
+
+  renderSaving(isSaving) {
+    if (isSaving) {
+      this._modalForm.querySelector(".modal__save-button").textContent =
+        "Saving...";
+    } else {
+      this._modalForm.querySelector(".modal__save-button").textContent =
+        this._buttonText;
+    }
   }
 }

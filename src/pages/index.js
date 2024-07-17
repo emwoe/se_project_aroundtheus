@@ -136,6 +136,7 @@ modalImageEditBtn.addEventListener("click", () => {
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
   handleFormSubmit: (formData) => {
+    profileModal.renderSaving(true);
     api
       .editUserInfo(formData)
       .then((userData) => {
@@ -143,31 +144,17 @@ const profileModal = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      });
-    profileModal.close();
-  },
-});
-/*
-const newProfilePictureModal = new PopupWithForm({
-  popupSelector: ".modal_type_change-profile-picture",
-  handleFormSubmit: (data) => {
-    console.log("formLink is" + data);
-    api
-      .editUserProfilePicture(formLink)
-      .then((userData) => {
-        newUserInfo.setUserPicture({ avatar: userData.avatar });
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .finally(() => profileModal.renderSaving(false));
     profileModal.close();
   },
+  buttonText: "Save",
 });
-*/
 
 const newProfilePictureModal = new PopupWithForm({
   popupSelector: ".modal_type_change-profile-picture",
   handleFormSubmit: (formData) => {
+    newProfilePictureModal.renderSaving(true);
     api
       .editUserProfilePicture(formData)
       .then((userData) => {
@@ -175,14 +162,17 @@ const newProfilePictureModal = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(() => newPictureProfileModal.renderSaving(false));
     newProfilePictureModal.close();
   },
+  buttonText: "Save",
 });
 
 const newImageModal = new PopupWithForm({
   popupSelector: ".modal_type_new-image",
   handleFormSubmit: (newData) => {
+    newImageModal.renderSaving(true);
     api
       .addNewCard(newData)
       .then((cardData) => {
@@ -191,11 +181,13 @@ const newImageModal = new PopupWithForm({
       .then((addedCard) => cardArea.addItem(addedCard))
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(() => newImageModal.renderSaving(false));
     modalImageForm.reset();
     newImageValidator.toggleButtonState();
     newImageModal.close();
   },
+  buttonText: "Create",
 });
 
 profileModal.setEventListeners();
