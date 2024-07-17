@@ -17,6 +17,7 @@ import {
   modalJob,
   modalImageTitle,
   modalImageLink,
+  newProfileImageBtn,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -125,6 +126,11 @@ modalProfileEditBtn.addEventListener("click", () => {
   profileValidator.resetValidation();
 });
 
+newProfileImageBtn.addEventListener("click", () => {
+  newProfilePictureModal.open();
+  newProfilePictureModal.setEventListeners();
+});
+
 modalImageEditBtn.addEventListener("click", () => {
   newImageModal.open();
 });
@@ -142,6 +148,11 @@ const profileModal = new PopupWithForm({
       });
     profileModal.close();
   },
+});
+
+const newProfilePictureModal = new PopupWithForm({
+  popupSelector: ".modal_type_change-profile-picture",
+  handleFormSubmit: (formData) => {},
 });
 
 const newImageModal = new PopupWithForm({

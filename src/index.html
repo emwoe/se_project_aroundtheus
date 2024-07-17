@@ -81,6 +81,24 @@
         </form>
       </div>
     </div>
+    <div class="modal modal_type_change-profile-picture">
+      <div class="modal__wrapper">
+        <button class="modal__close-button" type="button"></button>
+        <form class="form modal__container" novalidate>
+          <h2 class="modal__title">Change profile picture</h2>
+          <input
+            id="new-profile-image-link"
+            name="link"
+            class="modal__single-input"
+            type="url"
+            placeholder="Image link"
+            required
+          />
+          <span class="modal__input-error image-link-input-error"></span>
+          <button class="modal__save-button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
     <div class="modal modal_type_delete-image">
       <div
         class="modal__wrapper modal__wrapper_type_delete_image modal__container"
@@ -102,7 +120,10 @@
     </div>
     <main class="content">
       <section class="profile">
-        <div class="profile__circle"></div>
+        <div class="profile__circle__wrapper">
+          <div class="profile__sheer-hover"></div>
+          <div class="profile__circle"></div>
+        </div>
         <div class="info">
           <h1 class="info__name">Jacques Cousteau</h1>
           <button class="info__button" type="button"></button>

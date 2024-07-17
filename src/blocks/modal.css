@@ -85,6 +85,19 @@
   margin-top: 30px;
 }
 
+.modal__single-input {
+  width: 83.25%;
+  margin: 0 auto 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Inter", sans-serif;
+  color: black;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  margin-bottom: 17px;
+}
+
 .modal__save-button {
   width: 83.25%;
   background-color: black;
