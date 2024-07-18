@@ -43,6 +43,7 @@ export default class Card {
       this._handleLikeBtn();
     });
     cardDeleteBtn.addEventListener("click", () => {
+      console.log(this);
       this._handleDeleteBtn(this);
     });
     const cardImageElement = this._cardElement.querySelector(".card__image");
@@ -52,7 +53,7 @@ export default class Card {
   }
 
   deleteCard() {
+    console.log(this);
     this._cardElement.remove();
-    this._cardElement = null;
   }
 }

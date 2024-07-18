@@ -23,19 +23,31 @@ export default class PopupWithForm extends Popup {
     this._modalForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       const inputValues = this._getInputValues();
-      console.log("Input values before submit:", inputValues);
+      this.renderSaving(true);
       this._handleFormSubmit(inputValues);
+      this.renderSaving(false);
     });
     super.setEventListeners();
+  }
+
+  stopSaving(popup) {
+    popup._modalForm.querySelector(".modal__save-button").textContent =
+      popup._buttonText;
+    console.log("Found _modalForm and done");
+    popup.close();
   }
 
   renderSaving(isSaving) {
     if (isSaving) {
       this._modalForm.querySelector(".modal__save-button").textContent =
         "Saving...";
+      console.log("Found _modalForm and saving");
+      console.log(
+        this._modalForm.querySelector(".modal__save-button").textContent
+      );
     } else {
-      this._modalForm.querySelector(".modal__save-button").textContent =
-        this._buttonText;
+      console.log(this);
+      setTimeout(this.stopSaving, 1000, this);
     }
   }
 }

@@ -74,7 +74,7 @@ function createCard(item) {
     item,
     "#localeCard",
     openModalImage,
-    handleDelete,
+    handleDeleteClick,
     handleLike
   );
   return card.generateCard();
@@ -90,19 +90,26 @@ cardPopOut.setEventListeners();
 const deleteCardModal = new PopupWithDelete({
   popupSelector: ".modal_type_delete-image",
   handleBtnClick: () => {
-    console.log(cardToDelete.data._id);
-    api.deleteCard(cardToDelete.data._id).then(cardToDelete.deleteCard());
+    api.deleteCard(cardToDelete.data._id);
+    cardToDelete.deleteCard();
     deleteCardModal.close();
   },
 });
 
-function handleDelete(card) {
+/*.then(cardToDelete.deleteCard())*/
+
+function handleDeleteClick(card) {
+  console.log(card);
   deleteCardModal.open();
   deleteCardModal.setEventListeners();
   cardToDelete = card;
+  return cardToDelete;
+  /*
+  return card;
+  cardToDelete = card;
+  console.log(cardToDelete);
+  */
 }
-
-//Question: why can't I pass 'card' as a param in handleLike below (as I did in handleDelete above?)
 
 function handleLike() {
   if (this.data.isLiked == false) {
@@ -136,7 +143,9 @@ modalImageEditBtn.addEventListener("click", () => {
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
   handleFormSubmit: (formData) => {
+    /*
     profileModal.renderSaving(true);
+    */
     api
       .editUserInfo(formData)
       .then((userData) => {
@@ -144,9 +153,11 @@ const profileModal = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
+    /*
       .finally(() => profileModal.renderSaving(false));
     profileModal.close();
+    */
   },
   buttonText: "Save",
 });
@@ -154,7 +165,9 @@ const profileModal = new PopupWithForm({
 const newProfilePictureModal = new PopupWithForm({
   popupSelector: ".modal_type_change-profile-picture",
   handleFormSubmit: (formData) => {
+    /*
     newProfilePictureModal.renderSaving(true);
+    */
     api
       .editUserProfilePicture(formData)
       .then((userData) => {
@@ -162,9 +175,12 @@ const newProfilePictureModal = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      })
-      .finally(() => newPictureProfileModal.renderSaving(false));
+      });
+    /*
+      .finally(() => newProfilePictureModal.renderSaving(false));
+  
     newProfilePictureModal.close();
+    */
   },
   buttonText: "Save",
 });
@@ -172,7 +188,9 @@ const newProfilePictureModal = new PopupWithForm({
 const newImageModal = new PopupWithForm({
   popupSelector: ".modal_type_new-image",
   handleFormSubmit: (newData) => {
+    /*
     newImageModal.renderSaving(true);
+    */
     api
       .addNewCard(newData)
       .then((cardData) => {
@@ -181,11 +199,12 @@ const newImageModal = new PopupWithForm({
       .then((addedCard) => cardArea.addItem(addedCard))
       .catch((err) => {
         console.error(err);
-      })
-      .finally(() => newImageModal.renderSaving(false));
+      });
     modalImageForm.reset();
     newImageValidator.toggleButtonState();
+    /*
     newImageModal.close();
+    */
   },
   buttonText: "Create",
 });
