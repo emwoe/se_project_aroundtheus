@@ -32,10 +32,10 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
   }
 
-  stopSaving(popup) {
-    popup._modalForm.querySelector(".modal__save-button").textContent =
-      popup._buttonText;
-    popup.close();
+  stopSaving() {
+    this._modalForm.querySelector(".modal__save-button").textContent =
+      this._buttonText;
+    this.close();
   }
 
   renderSaving(isSaving) {
@@ -46,8 +46,10 @@ export default class PopupWithForm extends Popup {
     } else {
       /*
       console.log(this);
-      */
+      
       setTimeout(this.stopSaving, 1000, this);
+      */
+      this.stopSaving();
     }
   }
 }

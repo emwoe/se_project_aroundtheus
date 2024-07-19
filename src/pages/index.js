@@ -93,7 +93,10 @@ const deleteCardModal = new PopupWithDelete({
     api
       .deleteCard(cardToDelete.data._id)
       .then(cardToDelete.deleteCard())
-      .then(deleteCardModal.close());
+      .then(deleteCardModal.close())
+      .catch((err) => {
+        console.error(err);
+      });
   },
 });
 
@@ -108,11 +111,15 @@ function handleDeleteClick(card) {
 
 function handleLike() {
   if (this.data.isLiked == false) {
-    api.addLike(this.data._id);
-    this.data.isLiked = true;
+    api
+      .addLike(this.data._id)
+      .then((this.data.isLiked = true))
+      .then(this._cardHeart.classList.toggle("card__heart-option-liked"));
   } else {
-    api.removeLike(this.data._id);
-    this.data.isLiked = false;
+    api
+      .removeLike(this.data._id)
+      .then((this.data.isLiked = false))
+      .then(this._cardHeart.classList.toggle("card__heart-option-liked"));
   }
 }
 
@@ -176,12 +183,16 @@ const newImageModal = new PopupWithForm({
         return createCard(cardData);
       })
       .then((addedCard) => cardArea.addItem(addedCard))
+      .then(modalImageForm.reset())
+      .then(newImageValidator.toggleButtonState())
       .catch((err) => {
         console.error(err);
       })
       .finally(newImageModal.renderSaving(false));
+    /*
     modalImageForm.reset();
     newImageValidator.toggleButtonState();
+    */
   },
   buttonText: "Create",
 });

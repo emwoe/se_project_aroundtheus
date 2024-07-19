@@ -39,16 +39,13 @@ export default class Card {
   _setEventListeners() {
     const cardDeleteBtn = this._cardElement.querySelector(".card__delete-btn");
     this._cardHeart.addEventListener("click", () => {
-      this._handleLikeBtn().then(
-        this._cardHeart.classList.toggle("card__heart-option-liked")
-      );
+      this._handleLikeBtn();
       /*
       this._cardHeart.classList.toggle("card__heart-option-liked");
-      this._handleLikeBtn();
       */
     });
+
     cardDeleteBtn.addEventListener("click", () => {
-      console.log(this);
       this._handleDeleteBtn(this);
     });
     const cardImageElement = this._cardElement.querySelector(".card__image");
