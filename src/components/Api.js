@@ -40,16 +40,13 @@ export default class Api {
   }
 
   editUserProfilePicture(newUserLink) {
-    return this._serverRequest(
-      "https://around-api.en.tripleten-services.com/v1/users/me/avatar",
-      {
-        method: "PATCH",
-        headers: this._apiHeaders,
-        body: JSON.stringify({
-          avatar: newUserLink.avatar,
-        }),
-      }
-    );
+    return this._serverRequest(`${this._apiAddress}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._apiHeaders,
+      body: JSON.stringify({
+        avatar: newUserLink.avatar,
+      }),
+    });
   }
 
   addNewCard(newCardInput) {

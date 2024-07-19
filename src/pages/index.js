@@ -90,25 +90,20 @@ cardPopOut.setEventListeners();
 const deleteCardModal = new PopupWithDelete({
   popupSelector: ".modal_type_delete-image",
   handleBtnClick: () => {
-    api.deleteCard(cardToDelete.data._id);
-    cardToDelete.deleteCard();
-    deleteCardModal.close();
+    api
+      .deleteCard(cardToDelete.data._id)
+      .then(cardToDelete.deleteCard())
+      .then(deleteCardModal.close());
   },
 });
 
-/*.then(cardToDelete.deleteCard())*/
+deleteCardModal.setEventListeners();
 
 function handleDeleteClick(card) {
   console.log(card);
   deleteCardModal.open();
-  deleteCardModal.setEventListeners();
   cardToDelete = card;
   return cardToDelete;
-  /*
-  return card;
-  cardToDelete = card;
-  console.log(cardToDelete);
-  */
 }
 
 function handleLike() {
@@ -143,9 +138,6 @@ modalImageEditBtn.addEventListener("click", () => {
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
   handleFormSubmit: (formData) => {
-    /*
-    profileModal.renderSaving(true);
-    */
     api
       .editUserInfo(formData)
       .then((userData) => {
@@ -153,11 +145,8 @@ const profileModal = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      });
-    /*
-      .finally(() => profileModal.renderSaving(false));
-    profileModal.close();
-    */
+      })
+      .finally(profileModal.renderSaving(false));
   },
   buttonText: "Save",
 });
@@ -165,9 +154,6 @@ const profileModal = new PopupWithForm({
 const newProfilePictureModal = new PopupWithForm({
   popupSelector: ".modal_type_change-profile-picture",
   handleFormSubmit: (formData) => {
-    /*
-    newProfilePictureModal.renderSaving(true);
-    */
     api
       .editUserProfilePicture(formData)
       .then((userData) => {
@@ -175,12 +161,8 @@ const newProfilePictureModal = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      });
-    /*
-      .finally(() => newProfilePictureModal.renderSaving(false));
-  
-    newProfilePictureModal.close();
-    */
+      })
+      .finally(newProfilePictureModal.renderSaving(false));
   },
   buttonText: "Save",
 });
@@ -188,9 +170,6 @@ const newProfilePictureModal = new PopupWithForm({
 const newImageModal = new PopupWithForm({
   popupSelector: ".modal_type_new-image",
   handleFormSubmit: (newData) => {
-    /*
-    newImageModal.renderSaving(true);
-    */
     api
       .addNewCard(newData)
       .then((cardData) => {
@@ -199,12 +178,10 @@ const newImageModal = new PopupWithForm({
       .then((addedCard) => cardArea.addItem(addedCard))
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(newImageModal.renderSaving(false));
     modalImageForm.reset();
     newImageValidator.toggleButtonState();
-    /*
-    newImageModal.close();
-    */
   },
   buttonText: "Create",
 });
