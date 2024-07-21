@@ -22,7 +22,7 @@
     <div class="modal_type_profile modal">
       <div class="modal__wrapper">
         <button class="modal__close-button" type="button"></button>
-        <form class="form modal__container" novalidate>
+        <form class="form modal__container" name="editProfile" novalidate>
           <h2 class="modal__title">Edit Profile</h2>
 
           <input
@@ -54,7 +54,7 @@
     <div class="modal modal_type_new-image">
       <div class="modal__wrapper">
         <button class="modal__close-button" type="button"></button>
-        <form class="form modal__container" novalidate>
+        <form class="form modal__container" name="newPlace" novalidate>
           <h2 class="modal__title">New place</h2>
 
           <input
@@ -84,7 +84,11 @@
     <div class="modal modal_type_change-profile-picture">
       <div class="modal__wrapper">
         <button class="modal__close-button" type="button"></button>
-        <form class="form modal__container" novalidate>
+        <form
+          class="form modal__container"
+          name="changeProfilePicture"
+          novalidate
+        >
           <h2 class="modal__title">Change profile picture</h2>
           <input
             id="new-profile-image-link"

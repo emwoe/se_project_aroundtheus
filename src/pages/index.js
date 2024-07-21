@@ -67,7 +67,7 @@ api
     console.error(err);
   });
 
-//Create cards and handle their buttons
+//Create cards and handle their like and delete buttons
 
 function createCard(item) {
   const card = new Card(
@@ -96,8 +96,10 @@ const deleteCardModal = new PopupWithDelete({
       .then(deleteCardModal.close())
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(deleteCardModal.renderSaving(false));
   },
+  buttonText: "Yes",
 });
 
 deleteCardModal.setEventListeners();
@@ -109,17 +111,23 @@ function handleDeleteClick(card) {
   return cardToDelete;
 }
 
-function handleLike() {
-  if (this.data.isLiked == false) {
+function handleLike(card) {
+  if (card.data.isLiked == false) {
     api
-      .addLike(this.data._id)
-      .then((this.data.isLiked = true))
-      .then(this._cardHeart.classList.toggle("card__heart-option-liked"));
+      .addLike(card.data._id)
+      .then((card.data.isLiked = true))
+      .then(card._cardHeart.classList.toggle("card__heart-option-liked"))
+      .catch((err) => {
+        console.error(err);
+      });
   } else {
     api
-      .removeLike(this.data._id)
-      .then((this.data.isLiked = false))
-      .then(this._cardHeart.classList.toggle("card__heart-option-liked"));
+      .removeLike(card.data._id)
+      .then((card.data.isLiked = false))
+      .then(card._cardHeart.classList.toggle("card__heart-option-liked"))
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }
 
@@ -131,7 +139,7 @@ modalProfileEditBtn.addEventListener("click", () => {
   console.log(data);
   modalName.value = data.name;
   modalJob.value = data.job;
-  profileValidator.resetValidation();
+  formValidators["editProfile"].resetValidation;
 });
 
 newProfileImageBtn.addEventListener("click", () => {
@@ -142,57 +150,62 @@ modalImageEditBtn.addEventListener("click", () => {
   newImageModal.open();
 });
 
+//Form and Picture Modals
+
 const profileModal = new PopupWithForm({
   popupSelector: ".modal_type_profile",
-  handleFormSubmit: (formData) => {
-    api
-      .editUserInfo(formData)
-      .then((userData) => {
+  handleFormSubmit: function handleProfileFormSubmit(formData) {
+    function makeRequest() {
+      return api.editUserInfo(formData).then((userData) => {
         newUserInfo.setUserInfo({ name: userData.name, job: userData.about });
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(profileModal.renderSaving(false));
+      });
+    }
+    handleSubmit(makeRequest, profileModal);
   },
   buttonText: "Save",
 });
 
 const newProfilePictureModal = new PopupWithForm({
   popupSelector: ".modal_type_change-profile-picture",
-  handleFormSubmit: (formData) => {
-    api
-      .editUserProfilePicture(formData)
-      .then((userData) => {
+  handleFormSubmit: function handleProfilePictureSubmit(formData) {
+    function makeRequest() {
+      return api.editUserProfilePicture(formData).then((userData) => {
         newUserInfo.setUserPicture({ avatar: userData.avatar });
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(newProfilePictureModal.renderSaving(false));
+      });
+    }
+    handleSubmit(makeRequest, newProfilePictureModal);
   },
   buttonText: "Save",
 });
 
-const newImageModal = new PopupWithForm({
-  popupSelector: ".modal_type_new-image",
-  handleFormSubmit: (newData) => {
-    api
-      .addNewCard(newData)
+function handleNewPlaceSubmit(formData) {
+  function makeRequest() {
+    return api
+      .addNewCard(formData)
       .then((cardData) => {
         return createCard(cardData);
       })
       .then((addedCard) => cardArea.addItem(addedCard))
       .then(modalImageForm.reset())
-      .then(newImageValidator.toggleButtonState())
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(newImageModal.renderSaving(false));
-    /*
-    modalImageForm.reset();
-    newImageValidator.toggleButtonState();
-    */
+      .then(formValidators["newPlace"].toggleButtonState());
+  }
+  handleSubmit(makeRequest, newImageModal);
+}
+
+const newImageModal = new PopupWithForm({
+  popupSelector: ".modal_type_new-image",
+  handleFormSubmit: function handleNewPlaceSubmit(formData) {
+    function makeRequest() {
+      return api
+        .addNewCard(formData)
+        .then((cardData) => {
+          return createCard(cardData);
+        })
+        .then((addedCard) => cardArea.addItem(addedCard))
+        .then(modalImageForm.reset())
+        .then(formValidators["newPlace"].toggleButtonState());
+    }
+    handleSubmit(makeRequest, newImageModal);
   },
   buttonText: "Create",
 });
@@ -205,15 +218,34 @@ function openModalImage(card) {
   cardPopOut.open(card.data.name, card.data.link);
 }
 
+//Universal submit handler
+
+function handleSubmit(request, popupInstance, savingText = "Saving...") {
+  popupInstance.renderSaving(true, savingText);
+  request()
+    .then(() => {
+      popupInstance.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      popupInstance.renderSaving(false);
+    });
+}
+
 /* enable Validation */
 
-const profileValidator = new FormValidator(validationConfig, modalProfileForm);
-const newImageValidator = new FormValidator(validationConfig, modalImageForm);
-const newProfilePictureValidator = new FormValidator(
-  validationConfig,
-  newProfilePictureForm
-);
+const formValidators = {};
 
-profileValidator.enableValidation();
-newImageValidator.enableValidation();
-newProfilePictureValidator.enableValidation();
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(
+    document.querySelectorAll(validationConfig.formSelector)
+  );
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationConfig, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
