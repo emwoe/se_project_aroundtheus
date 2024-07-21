@@ -20,6 +20,12 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
+  setInputValues(data) {
+    this._modalInputs.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
   setEventListeners() {
     this._modalForm.addEventListener("submit", (evt) => {
       evt.preventDefault();

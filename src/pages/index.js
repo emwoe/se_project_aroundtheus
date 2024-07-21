@@ -136,9 +136,7 @@ function handleLike(card) {
 modalProfileEditBtn.addEventListener("click", () => {
   profileModal.open();
   const data = newUserInfo.getUserInfo();
-  console.log(data);
-  modalName.value = data.name;
-  modalJob.value = data.job;
+  profileModal.setInputValues(data);
   formValidators["editProfile"].resetValidation;
 });
 
