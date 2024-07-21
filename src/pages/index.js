@@ -31,9 +31,7 @@ import Api from "../components/Api.js";
 import PopupWithDelete from "../components/PopupDelete";
 
 let cardToDelete;
-let readyToDelete;
 let cardArea;
-let likedCard;
 let cardID;
 
 //Get initial cards and user info from server
@@ -179,20 +177,6 @@ const newProfilePictureModal = new PopupWithForm({
   },
   buttonText: "Save",
 });
-
-function handleNewPlaceSubmit(formData) {
-  function makeRequest() {
-    return api
-      .addNewCard(formData)
-      .then((cardData) => {
-        return createCard(cardData);
-      })
-      .then((addedCard) => cardArea.addItem(addedCard))
-      .then(() => modalImageForm.reset())
-      .then(() => formValidators["newPlace"].toggleButtonState());
-  }
-  handleSubmit(makeRequest, newImageModal);
-}
 
 const newImageModal = new PopupWithForm({
   popupSelector: ".modal_type_new-image",
