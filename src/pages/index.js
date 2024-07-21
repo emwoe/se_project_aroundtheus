@@ -34,6 +34,7 @@ let cardToDelete;
 let readyToDelete;
 let cardArea;
 let likedCard;
+let cardID;
 
 //Get initial cards and user info from server
 
@@ -92,12 +93,12 @@ const deleteCardModal = new PopupWithDelete({
   handleBtnClick: () => {
     api
       .deleteCard(cardToDelete.data._id)
-      .then(cardToDelete.deleteCard())
-      .then(deleteCardModal.close())
+      .then(() => cardToDelete.deleteCard())
+      .then(() => deleteCardModal.close())
       .catch((err) => {
         console.error(err);
       })
-      .finally(deleteCardModal.renderSaving(false));
+      .finally(() => deleteCardModal.renderSaving(false));
   },
   buttonText: "Yes",
 });
@@ -112,19 +113,20 @@ function handleDeleteClick(card) {
 }
 
 function handleLike(card) {
+  cardID = card.getID();
   if (card.data.isLiked == false) {
     api
-      .addLike(card.data._id)
+      .addLike(cardID)
       .then((card.data.isLiked = true))
-      .then(card._cardHeart.classList.toggle("card__heart-option-liked"))
+      .then(() => card.toggleHeart())
       .catch((err) => {
         console.error(err);
       });
   } else {
     api
-      .removeLike(card.data._id)
+      .removeLike(cardID)
       .then((card.data.isLiked = false))
-      .then(card._cardHeart.classList.toggle("card__heart-option-liked"))
+      .then(() => card.toggleHeart())
       .catch((err) => {
         console.error(err);
       });
@@ -186,8 +188,8 @@ function handleNewPlaceSubmit(formData) {
         return createCard(cardData);
       })
       .then((addedCard) => cardArea.addItem(addedCard))
-      .then(modalImageForm.reset())
-      .then(formValidators["newPlace"].toggleButtonState());
+      .then(() => modalImageForm.reset())
+      .then(() => formValidators["newPlace"].toggleButtonState());
   }
   handleSubmit(makeRequest, newImageModal);
 }
@@ -202,8 +204,8 @@ const newImageModal = new PopupWithForm({
           return createCard(cardData);
         })
         .then((addedCard) => cardArea.addItem(addedCard))
-        .then(modalImageForm.reset())
-        .then(formValidators["newPlace"].toggleButtonState());
+        .then(() => modalImageForm.reset())
+        .then(() => formValidators["newPlace"].toggleButtonState());
     }
     handleSubmit(makeRequest, newImageModal);
   },

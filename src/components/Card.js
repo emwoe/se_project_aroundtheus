@@ -36,13 +36,15 @@ export default class Card {
     return this._cardElement;
   }
 
+  getID() {
+    return this.data._id;
+  }
+
   _setEventListeners() {
     const cardDeleteBtn = this._cardElement.querySelector(".card__delete-btn");
+
     this._cardHeart.addEventListener("click", () => {
       this._handleLikeBtn(this);
-      /*
-      this._cardHeart.classList.toggle("card__heart-option-liked");
-      */
     });
 
     cardDeleteBtn.addEventListener("click", () => {
@@ -52,6 +54,10 @@ export default class Card {
     cardImageElement.addEventListener("click", () => {
       this._handleImageClick(this);
     });
+  }
+
+  toggleHeart() {
+    this._cardHeart.classList.toggle("card__heart-option-liked");
   }
 
   deleteCard() {
