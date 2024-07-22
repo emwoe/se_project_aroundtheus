@@ -115,16 +115,20 @@ function handleLike(card) {
   if (card.data.isLiked == false) {
     api
       .addLike(cardID)
-      .then((card.data.isLiked = true))
-      .then(() => card.toggleHeart())
+      .then(() => {
+        card.data.isLiked = true;
+        card.toggleHeart();
+      })
       .catch((err) => {
         console.error(err);
       });
   } else {
     api
       .removeLike(cardID)
-      .then((card.data.isLiked = false))
-      .then(() => card.toggleHeart())
+      .then(() => {
+        card.data.isLiked = false;
+        card.toggleHeart();
+      })
       .catch((err) => {
         console.error(err);
       });
