@@ -22,7 +22,7 @@
     <div class="modal_type_profile modal">
       <div class="modal__wrapper">
         <button class="modal__close-button" type="button"></button>
-        <form class="form modal__container" novalidate>
+        <form class="form modal__container" name="editProfile" novalidate>
           <h2 class="modal__title">Edit Profile</h2>
 
           <input
@@ -54,7 +54,7 @@
     <div class="modal modal_type_new-image">
       <div class="modal__wrapper">
         <button class="modal__close-button" type="button"></button>
-        <form class="form modal__container" novalidate>
+        <form class="form modal__container" name="newPlace" novalidate>
           <h2 class="modal__title">New place</h2>
 
           <input
@@ -81,6 +81,39 @@
         </form>
       </div>
     </div>
+    <div class="modal modal_type_change-profile-picture">
+      <div class="modal__wrapper">
+        <button class="modal__close-button" type="button"></button>
+        <form
+          class="form modal__container"
+          name="changeProfilePicture"
+          novalidate
+        >
+          <h2 class="modal__title">Change profile picture</h2>
+          <input
+            id="new-profile-image-link"
+            name="avatar"
+            class="modal__input modal__single-input"
+            type="url"
+            placeholder="Image link"
+            required
+          />
+          <span
+            class="modal__input-error new-profile-image-link-input-error"
+          ></span>
+          <button class="modal__save-button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal modal_type_delete-image">
+      <div
+        class="modal__wrapper modal__wrapper_type_delete_image modal__container"
+      >
+        <button class="modal__close-button" type="button"></button>
+        <h2 class="modal__title modal__title_type-delete">Are you sure?</h2>
+        <button class="modal__save-button" type="button">Yes</button>
+      </div>
+    </div>
     <div class="modal modal_type_image-pop-out">
       <div class="modal__wrapper modal__wrapper_type_image-pop-out">
         <button
@@ -93,7 +126,13 @@
     </div>
     <main class="content">
       <section class="profile">
-        <div class="profile__circle"></div>
+        <div class="profile__circle__wrapper">
+          <div class="profile__sheer-hover"></div>
+          <img
+            class="profile__circle"
+            src="https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          />
+        </div>
         <div class="info">
           <h1 class="info__name">Jacques Cousteau</h1>
           <button class="info__button" type="button"></button>

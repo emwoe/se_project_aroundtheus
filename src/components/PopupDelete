@@ -1,0 +1,29 @@
+import Popup from "./Popup.js";
+
+export default class PopupWithDelete extends Popup {
+  constructor({ popupSelector, handleBtnClick, buttonText }) {
+    super({ popupSelector });
+    this._buttonText = buttonText;
+    this._handleBtnClick = handleBtnClick;
+    this._modalForm = this._popupModal.querySelector(".modal__container");
+    this._submitBtn = this._modalForm.querySelector(".modal__save-button");
+    this.submitBtnText = this._submitBtn.textContent;
+  }
+
+  setEventListeners() {
+    this._submitBtn.addEventListener("click", (evt) => {
+      evt.preventDefault();
+      this.renderSaving(true);
+      this._handleBtnClick();
+    });
+    super.setEventListeners();
+  }
+
+  renderSaving(isSaving, savingText = "Deleting...") {
+    if (isSaving) {
+      this._submitBtnText = savingText;
+    } else {
+      this._submitBtnText = this._buttonText;
+    }
+  }
+}
